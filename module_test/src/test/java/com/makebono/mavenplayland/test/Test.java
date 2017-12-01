@@ -13,6 +13,6 @@ import com.makebono.mavenplayland.module_test.connector.SqlConnector;
  */
 public class Test {
     public static void main(final String[] args) throws IOException {
-        System.out.println(SqlConnector.selectById(1));
+        System.out.println(SqlConnector.selectById("1"));
     }
 }

@@ -2,8 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.makebono.mavenplayland.module_test.connector">
-<select id="selectById"  resultType="Student">
-select * from maven_test where ID=#{ID}
-</select>
+<mapper namespace="com.makebono.mavenplayland.module_test.connector">    
+    <resultMap type = "Student" id ="StudentMap">
+        <id column = "ID" property = "ID" />
+        <result column = "GIVENNAME" property = "GIVENNAME" />
+        <result column = "SURNAME" property = "SURNAME" />
+        <result column = "UNIVERSITY" property = "UNIVERSITY" />           
+    </resultMap>
+
+    <select id="selectById"  resultType="Student">
+        select * from maven_test where ID=#{ID}
+    </select>
+    <select id="selectAll" resultMap="StudentMap">
+        select * from maven_test
+    </select>
+    <select id="selectFromTable" parameterType="map" statementType="STATEMENT" resultType="Student">
+        select * from ${tableName} where ID=${ID}
+    </select>   
+    <insert id="insert" parameterType="com.makebono.mavenplayland.module_test.entities.Student">
+        insert into maven_test (ID, GIVENNAME, SURNAME, UNIVERSITY) values(#{ID},#{GIVENNAME},#{SURNAME},#{UNIVERSITY})
+    </insert>
+    <delete id="delete">
+        delete from maven_test where ID=#{id}
+    </delete>
 </mapper>
