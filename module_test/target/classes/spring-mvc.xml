@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- 查找最新的schemaLocation 访问 http://www.springframework.org/schema/ -->
+<!-- Remember to put this shit down at src/main/resources or you are fucked.-->
 <beans xmlns="http://www.springframework.org/schema/beans"
     xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
     xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
@@ -17,7 +18,6 @@
 
     <!-- 启用MVC注解 -->
     <mvc:annotation-driven />
-    <mvc:default-servlet-handler/>
     
     <!-- 静态资源文件，不会被Spring MVC拦截 -->
     <mvc:resources mapping="/views/images/**" location="/views/images/" />

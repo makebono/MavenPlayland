@@ -1,8 +1,5 @@
 package com.makebono.mavenplayland.module_test.controller;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
@@ -28,10 +25,11 @@ public class SpringTestController {
     public ModelAndView testA() {
         System.out.println("bonoland/module_index");
 
-        final Map<String, String> result = new HashMap<String, String>();
-        result.put("Message", "module_index");
+        // Call element named as "module_index"
         final ModelAndView modelView = new ModelAndView("module_index");
-        modelView.addObject(result);
+
+        // A pair of mapped value, display at ${message} in jsp.
+        modelView.addObject("message", "BONOBONO");
 
         return modelView;
     }
@@ -42,7 +40,9 @@ public class SpringTestController {
         System.out.println("You url request: " + input);
 
         final ModelAndView modelView = new ModelAndView("module_index");
-        modelView.addObject("Message", "urlCall");
+
+        // Display PathVariable at ${message}
+        modelView.addObject("message", input);
         return modelView;
     }
 
