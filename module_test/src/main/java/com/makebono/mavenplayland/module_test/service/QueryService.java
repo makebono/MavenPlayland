@@ -1,5 +1,9 @@
 package com.makebono.mavenplayland.module_test.service;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.stereotype.Service;
 
 import com.makebono.mavenplayland.module_test.connector.SqlConnector;
@@ -15,7 +19,26 @@ import com.makebono.mavenplayland.module_test.entities.Student;
 
 @Service
 public class QueryService {
-    public Student selectById(final int id) {
+    public Student selectById(final String id) {
         return SqlConnector.selectById(id);
+    }
+
+    public List<Student> selectAll() {
+        return SqlConnector.selectAll();
+    }
+
+    public Student selectOneFrom(final String tableName, final String id) {
+        final Map<String, Object> query = new HashMap<String, Object>();
+        query.put("tableName", tableName);
+        query.put("ID", id);
+        return SqlConnector.selectOneFrom(query);
+    }
+
+    public void insert(final int id, final String surname, final String givenName, final String university) {
+        SqlConnector.addStudent(id, surname, givenName, university);
+    }
+
+    public void delete(final int id) {
+        SqlConnector.delete(id);
     }
 }
