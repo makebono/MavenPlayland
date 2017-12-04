@@ -1,4 +1,4 @@
-package com.makebono.mavenplayland.module_test.connector;
+package com.makebono.mavenplayland.module_test.common.connector;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -12,26 +12,29 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.makebono.mavenplayland.module_test.entities.Student;
+import com.makebono.mavenplayland.module_test.mapper.MappingInterface;
+import com.makebono.mavenplayland.module_test.module.entities.Student;
 
 /** 
- * @ClassName: SqlConnector
- * @Description: MyBatis sql connector
+ * @ClassName: InterfaceSqlConnector 
+ * @Description: Sql connector class for interface query.
  * @author makebono
- * @date 2017年11月29日 下午3:07:33 
+ * @date 2017年12月4日 上午9:37:32 
  *  
  */
-public class SqlConnector {
+public class InterfaceSqlConnector {
     private final static Logger logger = LoggerFactory.getLogger(SqlConnector.class);
     private static Reader reader;
     private static SqlSessionFactory factory;
     static SqlSession session;
+    static MappingInterface mapper;
 
     static {
         try {
             reader = Resources.getResourceAsReader("mybatis-config.xml");
             factory = new SqlSessionFactoryBuilder().build(reader);;
             session = factory.openSession();
+            mapper = session.getMapper(MappingInterface.class);
         }
         catch (final IOException e) {
             System.out.println("Error occurs, message: " + e.getMessage());
@@ -45,8 +48,7 @@ public class SqlConnector {
         logger.info("Select * from maven_test where ID = 'id'", id);
 
         try {
-            result = session.selectOne("com.makebono.mavenplayland.module_test.connector.selectById", id);
-
+            result = mapper.selectOne(id);
             return result;
         }
         catch (final Exception e) {
@@ -61,7 +63,7 @@ public class SqlConnector {
         logger.info("Select * from maven_test");
 
         try {
-            result = session.selectList("com.makebono.mavenplayland.module_test.connector.selectAll");
+            result = mapper.selectAll();
 
             return result;
         }
@@ -77,7 +79,7 @@ public class SqlConnector {
         logger.info("Select * from {tableName} where ID = 'id'", query);
 
         try {
-            result = session.selectOne("com.makebono.mavenplayland.module_test.connector.selectFromTable", query);
+            result = mapper.selectOneFrom(query);
             return result;
         }
         catch (final Exception e) {
@@ -95,7 +97,7 @@ public class SqlConnector {
         logger.info("Adding student into database." + newStudent);
 
         try {
-            session.insert("com.makebono.mavenplayland.module_test.connector.insert", newStudent);
+            mapper.insert(newStudent);
             session.commit();
         }
         catch (final Exception e) {
@@ -103,10 +105,10 @@ public class SqlConnector {
         }
     }
 
-    public static void delete(final int id) {
+    public static void delete(final String id) {
         logger.info("Remove student from database by Id", id);
         try {
-            session.delete("com.makebono.mavenplayland.module_test.connector.delete", id);
+            mapper.delete(id);
             session.commit();
         }
         catch (final Exception e) {

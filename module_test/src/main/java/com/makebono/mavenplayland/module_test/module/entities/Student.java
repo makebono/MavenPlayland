@@ -1,4 +1,4 @@
-package com.makebono.mavenplayland.module_test.entities;
+package com.makebono.mavenplayland.module_test.module.entities;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;

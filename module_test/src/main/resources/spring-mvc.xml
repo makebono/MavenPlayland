@@ -22,7 +22,7 @@
     <mvc:resources mapping="/views/images/**" location="/views/images/" />
 
     <!-- package needs to be scanned -->
-    <context:component-scan base-package="com.makebono.mavenplayland.module_test">
+    <context:component-scan base-package="com.makebono.mavenplayland.module_test.module">
     <!-- scan for classes annotated as service or controller -->
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>

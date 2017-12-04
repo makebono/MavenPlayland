@@ -2,7 +2,7 @@ package com.makebono.mavenplayland.test;
 
 import java.io.IOException;
 
-import com.makebono.mavenplayland.module_test.connector.SqlConnector;
+import com.makebono.mavenplayland.module_test.common.connector.SqlConnector;
 
 /** 
  * @ClassName: Test 
