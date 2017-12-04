@@ -71,8 +71,7 @@ public class DBQueryController {
     public String selectOneFrom(final HttpServletRequest request) {
         final String id = "'" + request.getParameter("id") + "'";
         final String tableName = request.getParameter("tableName");
-        System.out.println(tableName);
-        System.out.println(id);
+        // System.out.println(tableName);
         // System.out.println(id);
 
         logger.info("Select from table by id: ", tableName, id);

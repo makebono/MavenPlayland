@@ -17,7 +17,7 @@ import com.makebono.mavenplayland.module_test.module.service.InterfaceQueryServi
 
 /** 
  * @ClassName: InterfaceQueryController 
- * @Description: Controller for testing query by Annotated Interface
+ * @Description: Controller for testing query by Annotated Interface. Different autowiring modes lying below, check them out.
  * @author makebono
  * @date 2017年12月4日 上午8:55:27 
  *  
@@ -27,9 +27,25 @@ import com.makebono.mavenplayland.module_test.module.service.InterfaceQueryServi
 public class InterfaceQueryController {
     private static final Logger logger = LoggerFactory.getLogger(InterfaceQueryController.class);
 
-    @Autowired
-    private InterfaceQueryService service;
+    // Property based autowiring
+    // @Autowired
+    private final InterfaceQueryService service;
 
+    // Constructor based autowiring
+    @Autowired
+    public InterfaceQueryController(final InterfaceQueryService service) {
+        System.out.println("Constructor based autowiring");
+        this.service = service;
+    }
+
+    // Setter based autowiring. Notice setter either based or constructor based should be chose to used, they can not
+    // exist at same time.
+    /*@Autowired
+    public void setService(final InterfaceQueryService service) {
+        System.out.println("Setter based autowiring");
+        this.service = service;
+    }
+    */
     @RequestMapping(value = "/queryById", method = { RequestMethod.POST })
     @ResponseBody
     public String queryById(final HttpServletRequest request) {
@@ -71,8 +87,7 @@ public class InterfaceQueryController {
     public String selectOneFrom(final HttpServletRequest request) {
         final String id = "'" + request.getParameter("id") + "'";
         final String tableName = request.getParameter("tableName");
-        System.out.println(tableName);
-        System.out.println(id);
+        // System.out.println(tableName);
         // System.out.println(id);
 
         logger.info("Select from table by id: ", tableName, id);
