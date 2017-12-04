@@ -1,4 +1,4 @@
-package com.makebono.mavenplayland.module_test.service;
+package com.makebono.mavenplayland.module_test.module.service;
 
 import java.util.HashMap;
 import java.util.List;
@@ -6,8 +6,8 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
-import com.makebono.mavenplayland.module_test.connector.SqlConnector;
-import com.makebono.mavenplayland.module_test.entities.Student;
+import com.makebono.mavenplayland.module_test.common.connector.SqlConnector;
+import com.makebono.mavenplayland.module_test.module.entities.Student;
 
 /** 
  * @ClassName: QueryService 
@@ -38,7 +38,7 @@ public class QueryService {
         SqlConnector.addStudent(id, surname, givenName, university);
     }
 
-    public void delete(final int id) {
+    public void delete(final String id) {
         SqlConnector.delete(id);
     }
 }

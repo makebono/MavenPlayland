@@ -1,4 +1,4 @@
-package com.makebono.mavenplayland.module_test.controller;
+package com.makebono.mavenplayland.module_test.module.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;

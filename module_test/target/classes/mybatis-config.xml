@@ -2,7 +2,7 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
         <typeAliases>
-        <typeAlias type="com.makebono.mavenplayland.module_test.entities.Student" alias="Student"/>
+        <typeAlias type="com.makebono.mavenplayland.module_test.module.entities.Student" alias="Student"/>
         </typeAliases>
         <environments default="development">
         <environment id="development">
@@ -21,5 +21,6 @@
         </environments>
         <mappers>
         <mapper resource="sqlmap.xml"></mapper>
+        <mapper class="com.makebono.mavenplayland.module_test.mapper.MappingInterface"></mapper>
         </mappers>
 </configuration>

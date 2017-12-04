@@ -1,4 +1,4 @@
-package com.makebono.mavenplayland.module_test.controller;
+package com.makebono.mavenplayland.module_test.module.controller;
 
 import java.util.List;
 
@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.makebono.mavenplayland.module_test.entities.Student;
-import com.makebono.mavenplayland.module_test.service.QueryService;
+import com.makebono.mavenplayland.module_test.module.entities.Student;
+import com.makebono.mavenplayland.module_test.module.service.QueryService;
 
 /** 
  * @ClassName: DBQueryController 
@@ -108,8 +108,7 @@ public class DBQueryController {
     @RequestMapping(value = "/delete", method = { RequestMethod.POST })
     @ResponseBody
     public void delete(final HttpServletRequest request) {
-        final String idString = request.getParameter("id");
-        final int id = Integer.valueOf(idString);
+        final String id = request.getParameter("id");
 
         logger.info("Delete from table: ", id);
         try {
