@@ -1,10 +1,3 @@
-/**   
- * @Title: MyRealm3.java 
- * @Package com.makebono.mavenplayland.test.shirotest.realm 
- * @Description: TODO(用一句话描述该文件做什么) 
- * @author tangxj
- * @date 2017年12月5日 上午9:58:08  
- */
 package com.makebono.mavenplayland.test.shirotest.realm;
 
 import org.apache.shiro.authc.AuthenticationException;
