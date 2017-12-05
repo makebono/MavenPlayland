@@ -31,5 +31,7 @@ public class SimpleReflectionTest {
         catch (final Exception e) {
             System.out.println("Error occurs, message: " + e.getMessage());
         }
+        
+        
     }
 }

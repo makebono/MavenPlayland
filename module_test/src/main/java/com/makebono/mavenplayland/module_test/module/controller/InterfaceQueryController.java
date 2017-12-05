@@ -38,8 +38,7 @@ public class InterfaceQueryController {
         this.service = service;
     }
 
-    // Setter based autowiring. Notice setter either based or constructor based should be chose to used, they can not
-    // exist at same time.
+    // Setter based autowiring
     /*@Autowired
     public void setService(final InterfaceQueryService service) {
         System.out.println("Setter based autowiring");
