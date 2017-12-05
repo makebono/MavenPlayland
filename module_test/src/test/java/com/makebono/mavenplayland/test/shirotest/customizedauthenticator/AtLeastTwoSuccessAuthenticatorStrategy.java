@@ -23,14 +23,14 @@ public class AtLeastTwoSuccessAuthenticatorStrategy extends AbstractAuthenticati
     @Override
     public AuthenticationInfo beforeAllAttempts(final Collection<? extends Realm> realms,
             final AuthenticationToken token) throws AuthenticationException {
-        return new SimpleAuthenticationInfo();// 返回一个权限的认证信息
+        return new SimpleAuthenticationInfo();
     }
 
     // Before validating each realm. Notice the different from before all...
     @Override
     public AuthenticationInfo beforeAttempt(final Realm realm, final AuthenticationToken token,
             final AuthenticationInfo aggregate) throws AuthenticationException {
-        return aggregate;// 返回之前合并的
+        return aggregate;
     }
 
     // After each validation.
