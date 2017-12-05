@@ -1,10 +1,3 @@
-/**   
- * @Title: AuthenticatorTest.java 
- * @Package com.makebono.mavenplayland.test.shirotest 
- * @Description: TODO(用一句话描述该文件做什么) 
- * @author tangxj
- * @date 2017年12月5日 上午10:08:29  
- */
 package com.makebono.mavenplayland.test.shirotest;
 
 import org.apache.shiro.SecurityUtils;
