@@ -3,7 +3,7 @@
  * Simple flow:
  *     c = getClass -> m = getMethod -> m.invoke(s) to call the method. 
  */
-package com.makebono.mavenplayland.test;
+package com.makebono.mavenplayland.test.reflectiontest;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -31,7 +31,6 @@ public class SimpleReflectionTest {
         catch (final Exception e) {
             System.out.println("Error occurs, message: " + e.getMessage());
         }
-        
-        
+
     }
 }
