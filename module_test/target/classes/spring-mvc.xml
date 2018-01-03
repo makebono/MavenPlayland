@@ -14,29 +14,9 @@
         http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd   
         http://www.springframework.org/schema/tx   
         http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
-    
-    <!-- Be careful about this. If you used mvc:annotation-driven, then must add this bean here. Since
-         annotation-driven will automatically load RequestMappingHandlerAdapter bean, so load it here is
-         a must if using customized binding initializer. -->
-    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
-    <property name="webBindingInitializer">
-        <bean class="com.makebono.mavenplayland.module_test.common.utils.CustomizedWebBindingInitializer"/> 
-    </property>
-    </bean>
-
-    <mvc:annotation-driven />
-    <context:annotation-config /> 
-    <!-- <context:annotation-config></context:annotation-config> -->
-    
+        
     <!-- location of resources file -->
     <mvc:resources mapping="/views/images/**" location="/views/images/" />
-
-    <!-- package needs to be scanned -->
-    <context:component-scan base-package="com.makebono.mavenplayland.module_test">
-    <!-- scan for classes annotated as service or controller -->
-        <context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
-        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
-    </context:component-scan> 
     
     <bean
         class="org.springframework.web.servlet.view.InternalResourceViewResolver">
