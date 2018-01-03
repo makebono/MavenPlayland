@@ -8,7 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.support.WebBindingInitializer;
 import org.springframework.web.context.request.WebRequest;
 
@@ -26,7 +25,6 @@ public class CustomizedWebBindingInitializer implements WebBindingInitializer {
 
     final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
 
-    @InitBinder
     @Override
     public void initBinder(final WebDataBinder binder, final WebRequest req) {
         // System.out.println("boo!");
