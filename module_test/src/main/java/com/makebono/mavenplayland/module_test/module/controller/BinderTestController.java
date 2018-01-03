@@ -2,6 +2,8 @@ package com.makebono.mavenplayland.module_test.module.controller;
 
 import java.util.Date;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -25,10 +27,13 @@ public class BinderTestController {
 
     @RequestMapping(value = "/bindingTest", method = { RequestMethod.POST, RequestMethod.GET })
     @ResponseBody
-    public String test(@RequestParam(value = "student") final Student student,
-            @RequestParam(value = "date") final Date date) {
+    public String test(@RequestParam(required = false, value = "student") final Student student,
+            @RequestParam(required = false, value = "date") Date date, final HttpServletRequest request) {
         logger.info("Invoking customized WebBindingInitializer", student, date);
         try {
+            if (date == null || request.getParameter("date") == " ") {
+                date = new Date();
+            }
             System.out.println(student);
             System.out.println(date);
             return student + "<br>" + date;
