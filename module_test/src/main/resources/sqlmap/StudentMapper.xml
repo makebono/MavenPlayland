@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.makebono.mavenplayland.module_test.mapper.dao.StudentMapper">
+  <resultMap id="BaseResultMap" type="com.makebono.mavenplayland.module_test.module.entities.Student">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="ID" jdbcType="BIGINT" property="ID" />
+    <result column="GIVENNAME" jdbcType="VARCHAR" property="GIVENNAME" />
+    <result column="SURNAME" jdbcType="VARCHAR" property="SURNAME" />
+    <result column="UNIVERSITY" jdbcType="VARCHAR" property="UNIVERSITY" />
+  </resultMap>
+</mapper>

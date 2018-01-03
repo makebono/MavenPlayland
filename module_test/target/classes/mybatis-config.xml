@@ -20,7 +20,8 @@
         </environment>
         </environments>
         <mappers>
-        <mapper resource="sqlmap.xml"></mapper>
-        <mapper class="com.makebono.mavenplayland.module_test.mapper.MappingInterface"></mapper>
+            <mapper resource="sqlmap.xml"></mapper>
+            <mapper class="com.makebono.mavenplayland.module_test.mapper.MappingInterface"></mapper>
         </mappers>
+        
 </configuration>
