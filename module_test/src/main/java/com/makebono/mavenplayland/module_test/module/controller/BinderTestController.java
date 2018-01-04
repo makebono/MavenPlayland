@@ -53,27 +53,42 @@ public class BinderTestController {
         });
     }
 
-    @RequestMapping(value = "/globalBindingTest", method = { RequestMethod.POST, RequestMethod.GET })
+    @RequestMapping(value = "/globalBindingTestStudent", method = { RequestMethod.POST, RequestMethod.GET })
     @ResponseBody
-    public String test(@RequestParam(required = false, value = "student") final Student student,
-            @RequestParam(required = false, value = "date") Date date, final HttpServletRequest request) {
-        logger.info("Invoking customized WebBindingInitializer", student, date);
+    public Student test(@RequestParam(required = false, value = "student") final Student student,
+            final HttpServletRequest request) {
+        logger.info("Invoking customized WebBindingInitializer", student);
+        try {
+            System.out.println(student);
+            return student;
+        }
+        catch (final Exception e) {
+            System.out.println("Error occurs, message: " + e.getMessage());
+            return null;
+        }
+    }
+
+    @RequestMapping(value = "/globalBindingTestDate", method = { RequestMethod.POST, RequestMethod.GET })
+    @ResponseBody
+    public Date test2(@RequestParam(required = false, value = "date") Date date, final HttpServletRequest request) {
+        logger.info("Invoking customized WebBindingInitializer", date);
         try {
             if (date == null || request.getParameter("date") == " ") {
                 date = new Date();
             }
-            System.out.println(student);
+
             System.out.println(date);
-            return student + "<br>" + date;
+            return date;
         }
         catch (final Exception e) {
-            return "Error occurs, message: " + e.getMessage();
+            System.out.println("Error occurs, message: " + e.getMessage());
+            return null;
         }
     }
 
     @RequestMapping(value = "/localBindingTest", method = { RequestMethod.POST, RequestMethod.GET })
     @ResponseBody
-    public String test2(@RequestParam(value = "intArray") final int[] intArray) {
+    public String test3(@RequestParam(value = "intArray") final int[] intArray) {
         logger.info("Binding String input into int[]" + intArray);
 
         try {

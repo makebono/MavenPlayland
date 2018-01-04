@@ -23,6 +23,12 @@
     <property name="webBindingInitializer">
         <bean class="com.makebono.mavenplayland.module_test.common.utils.CustomizedWebBindingInitializer"/> 
     </property>
+    <property name="messageConverters">
+    <list>
+        <bean class="com.makebono.mavenplayland.module_test.common.utils.StudentResponseConverter"/>
+        <bean class="com.makebono.mavenplayland.module_test.common.utils.DateResponseConverter"/>
+    </list>        
+    </property>   
     </bean>            
     
     <mvc:annotation-driven />

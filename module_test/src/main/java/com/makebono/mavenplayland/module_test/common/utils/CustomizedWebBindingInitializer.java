@@ -63,6 +63,7 @@ public class CustomizedWebBindingInitializer implements WebBindingInitializer {
             }
         });
 
+        // It's apparently that multiple binding could be done here. Just register the custom editors one by one.
         final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
         dateFormat.setLenient(false);
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));

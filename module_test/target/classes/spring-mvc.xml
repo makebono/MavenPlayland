@@ -23,5 +23,5 @@
         <property name="prefix" value="/views/" />
         <property name="suffix" value=".jsp" />
         <property name="order" value="1" />
-    </bean>        
+    </bean>           
 </beans>  
