@@ -20,15 +20,21 @@
          a must if using customized binding initializer. -->
     <!-- And don't forget to put this under DispatcherServlet's defined path. -->         
     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
-    <property name="webBindingInitializer">
-        <bean class="com.makebono.mavenplayland.module_test.common.utils.CustomizedWebBindingInitializer"/> 
-    </property>
-    <property name="messageConverters">
-    <list>
-        <bean class="com.makebono.mavenplayland.module_test.common.utils.StudentResponseConverter"/>
-        <bean class="com.makebono.mavenplayland.module_test.common.utils.DateResponseConverter"/>
-    </list>        
-    </property>   
+        <!-- Binding input request -->
+        <property name="webBindingInitializer">
+            <bean class="com.makebono.mavenplayland.module_test.common.utils.CustomizedWebBindingInitializer"/> 
+        </property>
+        
+        <!-- Intepreting/Converting output type -->
+        <property name="messageConverters">
+            <list>
+                <!-- When multiple convertes existing, a response would scan through converter list in top to bottom order as writting down below. -->
+                <bean class="com.makebono.mavenplayland.module_test.common.utils.DateResponseConverter"/>
+                <bean class="com.makebono.mavenplayland.module_test.common.utils.StudentResponseConverter"/>
+                <bean class="com.makebono.mavenplayland.module_test.common.utils.StringResponseConverter"/>
+            </list>        
+        </property>
+           
     </bean>            
     
     <mvc:annotation-driven />
