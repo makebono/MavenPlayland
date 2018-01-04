@@ -19,7 +19,7 @@ import com.makebono.mavenplayland.module_test.module.entities.Student;
 
 /** 
  * @ClassName: BinderTestController 
- * @Description: Testing the customized web binding initilizer 
+ * @Description: Testing the customized web binding initilizer and message converter.
  * @author makebono
  * @date 2018年1月3日 上午10:31:05 
  *  
@@ -86,6 +86,7 @@ public class BinderTestController {
         }
     }
 
+    // When using customized converter, String will also need a converter. So don't forget to add one.
     @RequestMapping(value = "/localBindingTest", method = { RequestMethod.POST, RequestMethod.GET })
     @ResponseBody
     public String test3(@RequestParam(value = "intArray") final int[] intArray) {
