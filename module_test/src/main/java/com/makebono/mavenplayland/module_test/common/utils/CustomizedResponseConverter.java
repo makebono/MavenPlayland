@@ -20,7 +20,7 @@ import org.springframework.http.converter.HttpMessageNotWritableException;
  * @date 2018年1月4日 上午10:12:03 
  *  
  */
-@SuppressWarnings(value = { "rawtypes" })
+@SuppressWarnings(value = { "rawtypes", "unchecked" })
 public abstract class CustomizedResponseConverter<T> extends AbstractHttpMessageConverter<T> {
     @Override
     protected boolean supports(final Class<?> clazz) {
@@ -30,9 +30,8 @@ public abstract class CustomizedResponseConverter<T> extends AbstractHttpMessage
         target = (Class) type.getActualTypeArguments()[0];
         // System.out.println(target.getName());
         // System.out.println(clazz.getName());
-        System.out.println(
-                "Validating if the responding class has a converter: " + (target.getName().equals(clazz.getName())));
-        return (target.getName().equals(clazz.getName()));
+        System.out.println("Validating if the responding class has a converter: " + (target.isAssignableFrom(clazz)));
+        return (target.isAssignableFrom(clazz));
     }
 
     // This decides if could write the ouput. So need to be handled carefully.
