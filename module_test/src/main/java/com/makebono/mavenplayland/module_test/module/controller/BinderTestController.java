@@ -1,7 +1,6 @@
 package com.makebono.mavenplayland.module_test.module.controller;
 
 import java.beans.PropertyEditorSupport;
-import java.util.Arrays;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,54 +30,70 @@ public class BinderTestController {
 
     @InitBinder
     public void intArrayBinder(final WebDataBinder binder) {
-        binder.registerCustomEditor(Arrays.class, new PropertyEditorSupport() {
+        // Don't use Arrays.class here, or it will been store to an int[1]. So when input string > Integer.Max, it will
+        // trigger error.
+        binder.registerCustomEditor(int[].class, new PropertyEditorSupport() {
             @Override
             public void setAsText(final String input) {
-                logger.debug("Convert input into int[].");
                 try {
-                    System.out.println("Read a String input, convert it into int[].");
                     final int[] result = new int[input.length()];
                     int i = 0;
                     for (final char cursor : input.toCharArray()) {
-                        result[i++] = Character.digit(cursor, 10);
+                        // Use Character.digit(char ch, int radix) for only accepting numerical input. When a letter
+                        // input, .digit() returns -1.
+                        // getNumericValue accepts letters input, returning their Unicode. For example 'a' = 10.
+                        result[i++] = Character.getNumericValue(cursor);
                     }
-
                     setValue(result);
                 }
                 catch (final Exception e) {
-                    System.out.println(
-                            "Error occurs, please follow the input format: 'FirstName LastName(id) from University'. For more details: "
-                                    + e.getMessage());
+                    System.out.println("Error occurs, message: " + e.getMessage());
                 }
             }
         });
     }
 
-    @RequestMapping(value = "/globalBindingTest", method = { RequestMethod.POST, RequestMethod.GET })
+    @RequestMapping(value = "/globalBindingTestStudent", method = { RequestMethod.POST, RequestMethod.GET })
     @ResponseBody
-    public String test(@RequestParam(required = false, value = "student") final Student student,
-            @RequestParam(required = false, value = "date") Date date, final HttpServletRequest request) {
-        logger.info("Invoking customized WebBindingInitializer", student, date);
+    public Student test(@RequestParam(required = false, value = "student") final Student student,
+            final HttpServletRequest request) {
+        logger.info("Invoking customized WebBindingInitializer", student);
+        try {
+            System.out.println(student);
+            return student;
+        }
+        catch (final Exception e) {
+            System.out.println("Error occurs, message: " + e.getMessage());
+            return null;
+        }
+    }
+
+    @RequestMapping(value = "/globalBindingTestDate", method = { RequestMethod.POST, RequestMethod.GET })
+    @ResponseBody
+    public Date test2(@RequestParam(required = false, value = "date") Date date, final HttpServletRequest request) {
+        logger.info("Invoking customized WebBindingInitializer", date);
         try {
             if (date == null || request.getParameter("date") == " ") {
                 date = new Date();
             }
-            System.out.println(student);
+
             System.out.println(date);
-            return student + "<br>" + date;
+            return date;
         }
         catch (final Exception e) {
-            return "Error occurs, message: " + e.getMessage();
+            System.out.println("Error occurs, message: " + e.getMessage());
+            return null;
         }
     }
 
     @RequestMapping(value = "/localBindingTest", method = { RequestMethod.POST, RequestMethod.GET })
     @ResponseBody
-    public String test2(@RequestParam(value = "intArray") final int[] intArray) {
+    public String test3(@RequestParam(value = "intArray") final int[] intArray) {
         logger.info("Binding String input into int[]" + intArray);
 
         try {
-            final StringBuilder sb = new StringBuilder();
+            final StringBuilder sb = new StringBuilder(
+                    String.format("Length of input int[]: %d.<br>", intArray.length));
             for (final int i : intArray) {
                 sb.append(i);
             }
