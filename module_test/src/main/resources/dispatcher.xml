@@ -29,10 +29,11 @@
         <property name="messageConverters">
             <list>
                 <!-- When multiple converters existing, a response would scan through converter list in top to bottom order as writting down below. -->
-                <bean class="com.makebono.mavenplayland.module_test.common.utils.DateResponseConverter"/>
+                <!-- Better not use self defined converters along with Json. Some delicate conflicts, there are. -->
+                <!-- <bean class="com.makebono.mavenplayland.module_test.common.utils.DateResponseConverter"/>
                 <bean class="com.makebono.mavenplayland.module_test.common.utils.StudentResponseConverter"/>
                 <bean class="com.makebono.mavenplayland.module_test.common.utils.StringResponseConverter"/>
-                <bean class="com.makebono.mavenplayland.module_test.common.utils.ListResponseConverter"/>
+                <bean class="com.makebono.mavenplayland.module_test.common.utils.ListResponseConverter"/> -->
                 <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/> 
             </list>        
         </property>
