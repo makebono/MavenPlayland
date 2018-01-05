@@ -24,7 +24,7 @@ public class ListResponseConverter extends CustomizedResponseConverter<List> {
         final StringBuilder output = new StringBuilder();
 
         for (final Object cursor : t) {
-            output.append(cursor + "<br>");
+            output.append(cursor + "\n");
         }
 
         outputStream.write(output.toString().getBytes());

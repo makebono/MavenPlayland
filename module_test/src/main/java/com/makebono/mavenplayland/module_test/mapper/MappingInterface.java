@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 
+import com.makebono.mavenplayland.module_test.module.entities.MicroArchitecture;
 import com.makebono.mavenplayland.module_test.module.entities.Student;
 
 /** 
@@ -23,11 +24,17 @@ public interface MappingInterface {
     @Select("select * from maven_test where ID=#{ID}")
     public Student selectOne(String id);
 
+    @Select("select * from maven_test2 where MODEL=#{MODEL}")
+    public MicroArchitecture selectOneMicroArchitecture(String MODEL);
+
     @Select("select * from ${tableName} where ID=${ID}")
     public Student selectOneFrom(Map<String, Object> Query);
 
     @Select("select * from maven_test")
     public List<Student> selectAll();
+
+    @Select("select * from maven_test2")
+    public List<MicroArchitecture> selectAllMicroArchitecture();
 
     @Delete("delete from maven_test where ID=#{id}")
     public void delete(String id);

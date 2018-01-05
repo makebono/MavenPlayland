@@ -33,10 +33,11 @@
                 <bean class="com.makebono.mavenplayland.module_test.common.utils.StudentResponseConverter"/>
                 <bean class="com.makebono.mavenplayland.module_test.common.utils.StringResponseConverter"/>
                 <bean class="com.makebono.mavenplayland.module_test.common.utils.ListResponseConverter"/>
+                <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/> 
             </list>        
         </property>
            
-    </bean>            
+    </bean>              
     
     <mvc:annotation-driven />
     <!-- <context:annotation-config></context:annotation-config> -->

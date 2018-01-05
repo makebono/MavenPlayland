@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.makebono.mavenplayland.module_test.mapper.MappingInterface;
+import com.makebono.mavenplayland.module_test.module.entities.MicroArchitecture;
 import com.makebono.mavenplayland.module_test.module.entities.Student;
 
 /** 
@@ -57,6 +58,21 @@ public class InterfaceSqlConnector {
         }
     }
 
+    public static MicroArchitecture selectMicroArchitecture(final String MODEL) {
+        final MicroArchitecture result;
+
+        logger.info("Select * from maven_test2 where MODEL = 'MODEL'", MODEL);
+
+        try {
+            result = mapper.selectOneMicroArchitecture(MODEL);
+            return result;
+        }
+        catch (final Exception e) {
+            System.out.println("Error occurs, message: " + e.getMessage());
+            return null;
+        }
+    }
+
     public static List<Student> selectAll() {
         List<Student> result;
 
@@ -64,6 +80,22 @@ public class InterfaceSqlConnector {
 
         try {
             result = mapper.selectAll();
+
+            return result;
+        }
+        catch (final Exception e) {
+            System.out.println("Error occurs, message: " + e.getMessage());
+            return null;
+        }
+    }
+
+    public static List<MicroArchitecture> selectAllMicroArchitecture() {
+        List<MicroArchitecture> result;
+
+        logger.info("Select * from maven_test2");
+
+        try {
+            result = mapper.selectAllMicroArchitecture();
 
             return result;
         }
