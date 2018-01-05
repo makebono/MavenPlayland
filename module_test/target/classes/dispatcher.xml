@@ -28,10 +28,11 @@
         <!-- Intepreting/Converting output type -->
         <property name="messageConverters">
             <list>
-                <!-- When multiple convertes existing, a response would scan through converter list in top to bottom order as writting down below. -->
+                <!-- When multiple converters existing, a response would scan through converter list in top to bottom order as writting down below. -->
                 <bean class="com.makebono.mavenplayland.module_test.common.utils.DateResponseConverter"/>
                 <bean class="com.makebono.mavenplayland.module_test.common.utils.StudentResponseConverter"/>
                 <bean class="com.makebono.mavenplayland.module_test.common.utils.StringResponseConverter"/>
+                <bean class="com.makebono.mavenplayland.module_test.common.utils.ListResponseConverter"/>
             </list>        
         </property>
            
@@ -45,5 +46,6 @@
     <!-- scan for classes annotated as service or controller -->
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+        <context:exclude-filter type="annotation" expression="com.makebono.mavenplayland.module_test.common.annotations.DontAutowireMe"/>
     </context:component-scan>       
 </beans>  

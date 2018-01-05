@@ -30,7 +30,9 @@ public abstract class CustomizedResponseConverter<T> extends AbstractHttpMessage
         target = (Class) type.getActualTypeArguments()[0];
         // System.out.println(target.getName());
         // System.out.println(clazz.getName());
-        System.out.println("Validating if the responding class has a converter: " + (target.isAssignableFrom(clazz)));
+        if (target.isAssignableFrom(clazz)) {
+            System.out.println("Converter for " + target.getName() + " found.");
+        }
         return (target.isAssignableFrom(clazz));
     }
 
@@ -53,10 +55,8 @@ public abstract class CustomizedResponseConverter<T> extends AbstractHttpMessage
             throws IOException, HttpMessageNotWritableException {
         System.out.println("Writing: " + outputMessage.getBody());
         final OutputStream outputStream = outputMessage.getBody();
-        System.out.println(outputMessage);
         final String output = t.toString();
         outputStream.write(output.getBytes());
         outputStream.close();
     }
-
 }

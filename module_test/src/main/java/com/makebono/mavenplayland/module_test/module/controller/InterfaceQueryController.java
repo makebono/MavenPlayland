@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.makebono.mavenplayland.module_test.module.entities.Student;
+import com.makebono.mavenplayland.module_test.module.service.DummyService;
 import com.makebono.mavenplayland.module_test.module.service.InterfaceQueryService;
 
 /** 
@@ -22,24 +23,28 @@ import com.makebono.mavenplayland.module_test.module.service.InterfaceQueryServi
  * @date 2017年12月4日 上午8:55:27 
  *  
  */
+@SuppressWarnings(value = { "unused", "rawtypes" })
 @Controller
 @RequestMapping("/interfaceTest")
 public class InterfaceQueryController {
     private static final Logger logger = LoggerFactory.getLogger(InterfaceQueryController.class);
 
     // Property based autowiring
-    // @Autowired
-    private final InterfaceQueryService service;
+    @Autowired
+    private InterfaceQueryService service;
+
+    @Autowired
+    private DummyService fakeService;
 
     // Constructor based autowiring
-    @Autowired
+    /*@Autowired
     public InterfaceQueryController(final InterfaceQueryService service) {
         System.out.println("Constructor based autowiring");
         this.service = service;
     }
-
+    
     // Setter based autowiring
-    /*@Autowired
+    @Autowired
     public void setService(final InterfaceQueryService service) {
         System.out.println("Setter based autowiring");
         this.service = service;
@@ -66,18 +71,15 @@ public class InterfaceQueryController {
 
     @RequestMapping(value = "/selectAll")
     @ResponseBody
-    public String selectAll() {
+    public List selectAll() {
         logger.info("Select all from maven_test ");
         try {
             final List<Student> result = service.selectAll();
-            final StringBuilder sb = new StringBuilder();
-            for (final Student cursor : result) {
-                sb.append(cursor + "<br>");
-            }
-            return sb.toString();
+            return result;
         }
         catch (final Exception e) {
-            return "Error occurs, message: " + e.getMessage();
+            System.out.println("Error occurs, message: " + e.getMessage());
+            return null;
         }
     }
 
