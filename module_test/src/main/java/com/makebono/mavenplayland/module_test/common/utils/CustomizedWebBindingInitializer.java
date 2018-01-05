@@ -17,8 +17,7 @@ import com.makebono.mavenplayland.module_test.module.entities.Student;
  * @ClassName: CustomizedWebBindingInitializer 
  * @Description: Implements WebBindingInitializer, translates date inputs
  * @author makebono
- * @date 2018年1月3日 上午10:15:47 
- *  
+ * @date 2018年1月3日 上午10:15:47  
  */
 public class CustomizedWebBindingInitializer implements WebBindingInitializer {
     private static final Logger logger = LoggerFactory.getLogger(CustomizedWebBindingInitializer.class);
