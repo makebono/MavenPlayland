@@ -1,2 +1,2 @@
 # MavenPlayland
-Maven stuffs for mess around
+Maven and Spring stuffs for messing around
