@@ -1,5 +1,7 @@
 package com.makebono.mavenplayland.test;
 
+import com.makebono.mavenplayland.test.dozermappingtest.DozerDemo;
+
 /** 
  * @ClassName: TestField 
  * @Description: General test field
@@ -8,5 +10,7 @@ package com.makebono.mavenplayland.test;
  *  
  */
 public class TestField {
-
+    public static void main(final String[] args) {
+        DozerDemo.xmlConfigurationMapping();
+    }
 }

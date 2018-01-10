@@ -39,7 +39,7 @@ public class JSONTestController {
 
         // System.out.println(id);
 
-        logger.info("Query by model: ", model);
+        logger.info("Query by model: " + model);
         try {
             final MicroArchitecture result = service.selectOne(model);
             System.out.println(result);

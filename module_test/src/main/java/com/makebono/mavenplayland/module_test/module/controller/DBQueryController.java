@@ -37,7 +37,7 @@ public class DBQueryController {
 
         // System.out.println(id);
 
-        logger.info("Query by id: ", id);
+        logger.info("Query by id: " + id);
         try {
             final Student result = sqlService.selectById(id);
             System.out.println(result);
@@ -74,7 +74,7 @@ public class DBQueryController {
         // System.out.println(tableName);
         // System.out.println(id);
 
-        logger.info("Select from table by id: ", tableName, id);
+        logger.info("Select from table: " + tableName + " where id = " + id);
         try {
             final Student result = sqlService.selectOneFrom(tableName, id);
             System.out.println(result);
@@ -95,7 +95,7 @@ public class DBQueryController {
         final String surname = request.getParameter("surname");
         final String university = request.getParameter("university");
 
-        logger.info("Insert to table: ", id, givenName, surname, university);
+        logger.info("Insert into table: " + id + " " + givenName + " " + surname + " " + university);
         try {
             sqlService.insert(id, surname, givenName, university);
         }
@@ -109,7 +109,7 @@ public class DBQueryController {
     public void delete(final HttpServletRequest request) {
         final String id = request.getParameter("id");
 
-        logger.info("Delete from table: ", id);
+        logger.info("Delete from table: " + id);
         try {
             sqlService.delete(id);
         }

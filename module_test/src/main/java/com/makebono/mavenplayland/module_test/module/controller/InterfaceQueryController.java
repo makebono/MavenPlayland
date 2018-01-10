@@ -57,7 +57,7 @@ public class InterfaceQueryController {
 
         // System.out.println(id);
 
-        logger.info("Query by id: ", id);
+        logger.info("Query by id: " + id);
         try {
             final Student result = service.selectById(id);
             System.out.println(result);
@@ -91,7 +91,7 @@ public class InterfaceQueryController {
         // System.out.println(tableName);
         // System.out.println(id);
 
-        logger.info("Select from table by id: ", tableName, id);
+        logger.info("Select from table: " + tableName + " where id = " + id);
         try {
             final Student result = service.selectOneFrom(tableName, id);
             System.out.println(result);
@@ -112,7 +112,7 @@ public class InterfaceQueryController {
         final String surname = request.getParameter("surname");
         final String university = request.getParameter("university");
 
-        logger.info("Insert to table: ", id, givenName, surname, university);
+        logger.info("Insert into table: " + id + " " + givenName + " " + surname + " " + university);
         try {
             service.insert(id, surname, givenName, university);
         }
@@ -126,7 +126,7 @@ public class InterfaceQueryController {
     public void delete(final HttpServletRequest request) {
         final String id = request.getParameter("id");
 
-        logger.info("Delete from table: ", id);
+        logger.info("Delete from table: " + id);
         try {
             service.delete(id);
         }
