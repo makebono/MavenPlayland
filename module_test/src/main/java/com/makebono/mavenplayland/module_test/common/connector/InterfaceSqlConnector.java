@@ -46,7 +46,7 @@ public class InterfaceSqlConnector {
     public static Student selectById(final String id) {
         final Student result;
 
-        logger.info("Select * from maven_test where ID = 'id'", id);
+        logger.info("Select * from maven_test where ID = 'id' " + id);
 
         try {
             result = mapper.selectOne(id);
@@ -61,7 +61,7 @@ public class InterfaceSqlConnector {
     public static MicroArchitecture selectMicroArchitecture(final String MODEL) {
         final MicroArchitecture result;
 
-        logger.info("Select * from maven_test2 where MODEL = 'MODEL'", MODEL);
+        logger.info("Select * from maven_test2 where MODEL = 'MODEL' " + MODEL);
 
         try {
             result = mapper.selectOneMicroArchitecture(MODEL);
@@ -108,7 +108,7 @@ public class InterfaceSqlConnector {
     public static Student selectOneFrom(final Map<String, Object> query) {
         final Student result;
 
-        logger.info("Select * from {tableName} where ID = 'id'", query);
+        logger.info("Select * from {tableName} where ID = 'id' " + query);
 
         try {
             result = mapper.selectOneFrom(query);
@@ -138,7 +138,7 @@ public class InterfaceSqlConnector {
     }
 
     public static void delete(final String id) {
-        logger.info("Remove student from database by Id", id);
+        logger.info("Remove student from database by Id " + id);
         try {
             mapper.delete(id);
             session.commit();

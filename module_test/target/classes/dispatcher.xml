@@ -22,9 +22,10 @@
     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
         <!-- Binding input request -->
         <property name="webBindingInitializer">
-            <bean class="com.makebono.mavenplayland.module_test.common.utils.CustomizedWebBindingInitializer"/> 
-        </property>
-        
+            <!-- <bean class="com.makebono.mavenplayland.module_test.common.utils.CustomizedWebBindingInitializer" lazy-init = "true" />  --> 
+            <bean class="com.makebono.mavenplayland.module_test.common.utils.CustomizedWebBindingInitializer" /> 
+        </property>      
+    
         <!-- Intepreting/Converting output type -->
         <property name="messageConverters">
             <list>
@@ -44,8 +45,8 @@
     <!-- <context:annotation-config></context:annotation-config> -->
 
     <!-- package needs to be scanned -->
-    <context:component-scan base-package="com.makebono.mavenplayland.module_test">
-    <!-- scan for classes annotated as service or controller -->
+    <context:component-scan base-package="com.makebono.mavenplayland">
+    <!-- scan for classes annotated as service or controller -->    
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
         <context:exclude-filter type="annotation" expression="com.makebono.mavenplayland.module_test.common.annotations.DontAutowireMe"/>

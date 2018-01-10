@@ -42,7 +42,7 @@ public class SqlConnector {
     public static Student selectById(final String id) {
         final Student result;
 
-        logger.info("Select * from maven_test where ID = 'id'", id);
+        logger.info("Select * from maven_test where ID = 'id' " + id);
 
         try {
             result = session.selectOne("com.makebono.mavenplayland.module_test.module.connector.selectById", id);
@@ -74,7 +74,7 @@ public class SqlConnector {
     public static Student selectOneFrom(final Map<String, Object> query) {
         final Student result;
 
-        logger.info("Select * from {tableName} where ID = 'id'", query);
+        logger.info("Select * from {tableName} where ID = 'id' " + query);
 
         try {
             result = session.selectOne("com.makebono.mavenplayland.module_test.module.connector.selectFromTable",
@@ -93,7 +93,7 @@ public class SqlConnector {
         newStudent.setId(id);
         newStudent.setSurname(surname);
         newStudent.setUniversity(university);
-        logger.info("Adding student into database." + newStudent);
+        logger.info("Adding student into database " + newStudent);
 
         try {
             session.insert("com.makebono.mavenplayland.module_test.module.connector.insert", newStudent);
@@ -105,7 +105,7 @@ public class SqlConnector {
     }
 
     public static void delete(final String id) {
-        logger.info("Remove student from database by Id", id);
+        logger.info("Remove student from database by Id " + id);
         try {
             session.delete("com.makebono.mavenplayland.module_test.module.connector.delete", id);
             session.commit();

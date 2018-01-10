@@ -4,6 +4,8 @@ import java.beans.PropertyEditorSupport;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.annotation.PostConstruct;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -24,10 +26,14 @@ public class CustomizedWebBindingInitializer implements WebBindingInitializer {
 
     final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
 
+    @PostConstruct
+    public void onInit() {
+        System.out.println(
+                "Initializing com.makebono.mavenplayland.module_test.common.utils.CustomizedWebBindingInitializer, BOO!");
+    }
+
     @Override
     public void initBinder(final WebDataBinder binder, final WebRequest req) {
-        // System.out.println("boo!");
-
         binder.registerCustomEditor(Student.class, new PropertyEditorSupport() {
             @Override
             public void setAsText(final String input) {
