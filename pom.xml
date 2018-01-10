@@ -7,6 +7,10 @@
   <name>MavenPlayland</name>
   <packaging>pom</packaging>
   
+  <properties>
+    <slf4j.version>1.7.7</slf4j.version>
+  </properties>
+  
   
   <dependencies> 
   <!-- https://mvnrepository.com/artifact/net.sf.dozer/dozer -->
@@ -70,23 +74,23 @@
     <dependency>
         <groupId>org.slf4j</groupId>
         <artifactId>slf4j-api</artifactId>
-        <version>1.7.7</version>
-    </dependency>
-    
-    <dependency>
-        <groupId>org.slf4j</groupId>
-        <artifactId>jcl-over-slf4j</artifactId>
-        <version>1.7.7</version>
-        <scope>runtime</scope>
+        <version>${slf4j.version}</version>
     </dependency>
     
     <dependency>
         <groupId>org.slf4j</groupId>
         <artifactId>slf4j-log4j12</artifactId>
-        <version>1.7.7</version>
+        <version>${slf4j.version}</version>
         <scope>runtime</scope>
     </dependency>
     
+    <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>jcl-over-slf4j</artifactId>
+        <version>${slf4j.version}</version>
+        <scope>runtime</scope>
+    </dependency>
+         
     <dependency>
         <groupId>log4j</groupId>
         <artifactId>log4j</artifactId>
@@ -137,10 +141,18 @@
     </dependency>
     
     <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid</artifactId>
-            <version>0.2.23</version>
+        <groupId>com.alibaba</groupId>
+        <artifactId>druid</artifactId>
+        <version>0.2.23</version>
     </dependency>
+    
+    <!-- https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple -->
+    <dependency>
+        <groupId>com.googlecode.json-simple</groupId>
+        <artifactId>json-simple</artifactId>
+        <version>1.1.1</version>
+    </dependency>
+    
     
   </dependencies>
   

@@ -18,7 +18,7 @@
     <!-- location of resources file -->
     <mvc:resources mapping="/views/images/**" location="/views/images/" />
     
-    <!-- Ok to nested load beans, check inside beans.xml file -->
+    <!-- Ok to nestedly loading beans, check inside beans.xml file -->
     <import resource="beans.xml" /> 
     
     <!-- Define dozer mapper. -->

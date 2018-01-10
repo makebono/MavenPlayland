@@ -15,7 +15,7 @@ import com.makebono.mavenplayland.module_test.module.entities.CoquitlamResident;
 import com.makebono.mavenplayland.module_test.module.entities.Resident;
 
 /** 
- * @ClassName: DozerSpringTestController 
+ * @className: DozerSpringTestController 
  * @Description: Test web based dozer mapping.
  * @author makebono
  * @date 2018年1月10日 上午10:55:11 
@@ -25,7 +25,7 @@ import com.makebono.mavenplayland.module_test.module.entities.Resident;
 @RequestMapping("/dozerTest")
 public class DozerSpringTestController {
     private static final Logger logger = LoggerFactory.getLogger(DozerSpringTestController.class);
-    private static Resident ass;
+    private static Resident resident;
 
     // After configured in application context file, don't forget to autowire a mapper in controller. Or it will use
     // default mapper instead.
@@ -33,16 +33,22 @@ public class DozerSpringTestController {
     private DozerBeanMapper mapper;
 
     static {
-        ass = new Resident();
-        ass.setAge("128");
-        ass.setId("1234567");
-        ass.setName("サノバビッチ");
+        resident = new Resident();
+        resident.setAge("128");
+        resident.setId("1234567");
+        resident.setName("サノバビッチ");
     }
 
     // @PostConstruct forces this method to be executed after DI.
     @PostConstruct
     public void init() {
-        this.mapper.map(ass, Object.class);
+        logger.info("Initializing dozer mapper.");
+        try {
+            this.mapper.map(resident, Object.class);
+        }
+        catch (final Exception e) {
+            System.out.println("Error occurs, message: " + e.getMessage());
+        }
     }
 
     @RequestMapping(value = "/directMapping")
@@ -50,9 +56,9 @@ public class DozerSpringTestController {
     public BCResident directMapping() {
         logger.info("Dozer direct mapping.");
         try {
-            final BCResident assBc = this.mapper.map(ass, BCResident.class);
-            System.out.println(assBc);
-            return assBc;
+            final BCResident residentBc = this.mapper.map(resident, BCResident.class);
+            System.out.println(residentBc);
+            return residentBc;
         }
         catch (final Exception e) {
             System.out.println("Error occurs, message: " + e.getMessage());
@@ -65,9 +71,9 @@ public class DozerSpringTestController {
     public CoquitlamResident xmlMapping() {
         logger.info("Dozer xml configured mapping.");
         try {
-            final CoquitlamResident assCoq = this.mapper.map(ass, CoquitlamResident.class);
-            System.out.println(assCoq);
-            return assCoq;
+            final CoquitlamResident residentCoq = this.mapper.map(resident, CoquitlamResident.class);
+            System.out.println(residentCoq);
+            return residentCoq;
         }
         catch (final Exception e) {
             System.out.println("Error occurs, message: " + e.getMessage());
