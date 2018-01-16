@@ -38,7 +38,11 @@
                 <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/> 
             </list>        
         </property>           
-    </bean>              
+    </bean>   
+    
+    <!-- Customized initialzation and destruction control -->
+    <bean class="com.makebono.mavenplayland.module_test.common.system.InitializationAndDestructionManager" 
+        init-method="bonoInit" destroy-method="bonoDestroy"></bean>           
     
     <mvc:annotation-driven />
     <!-- <context:annotation-config></context:annotation-config> -->

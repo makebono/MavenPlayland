@@ -2,6 +2,9 @@ package com.makebono.mavenplayland.module_test.module.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +23,8 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/springTest")
 public class SpringTestController {
+    @Autowired
+    private ApplicationContext appContext;
 
     @RequestMapping("/module_index")
     public ModelAndView testA() {
@@ -87,5 +92,27 @@ public class SpringTestController {
         System.out.println(key + "(" + value + ")");
 
         return "/module_index<br>" + "Parameter name: " + key + "<br>Parameter value: " + value;
+    }
+
+    @RequestMapping(value = "/destroy")
+    @ResponseBody
+    public String testG() {
+        ((ConfigurableApplicationContext) appContext).close();
+        return "Current application context destroyed.";
+    }
+
+    @RequestMapping(value = "/isOn")
+    @ResponseBody
+    public String testH() {
+
+        return ((ConfigurableApplicationContext) appContext).isActive() ? "Application context is active."
+                : "Application context closed";
+    }
+
+    @RequestMapping(value = "/dispatcherName")
+    @ResponseBody
+    public String testI() {
+
+        return ((ConfigurableApplicationContext) appContext).getDisplayName();
     }
 }

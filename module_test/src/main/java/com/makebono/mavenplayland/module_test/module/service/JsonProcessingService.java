@@ -43,7 +43,6 @@ public class JsonProcessingService {
         try {
             final File output = new File("d:/workspace/MavenPlayland/outputs/" + fileName);
             final BufferedWriter writer = new BufferedWriter(new FileWriter(output));
-            System.out.println(jsonFile.toJSONString());
             writer.write(jsonFile.toJSONString());
             writer.close();
         }
