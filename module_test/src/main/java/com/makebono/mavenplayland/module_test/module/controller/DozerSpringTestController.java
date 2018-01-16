@@ -15,7 +15,7 @@ import com.makebono.mavenplayland.module_test.module.entities.CoquitlamResident;
 import com.makebono.mavenplayland.module_test.module.entities.Resident;
 
 /** 
- * @className: DozerSpringTestController 
+ * @ClassName: DozerSpringTestController 
  * @Description: Test web based dozer mapping.
  * @author makebono
  * @date 2018年1月10日 上午10:55:11 

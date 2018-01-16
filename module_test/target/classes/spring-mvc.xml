@@ -19,10 +19,10 @@
     <mvc:resources mapping="/views/images/**" location="/views/images/" />
     
     <!-- Ok to nestedly loading beans, check inside beans.xml file -->
-    <import resource="beans.xml" /> 
+    <import resource="beans.xml" />    
     
     <!-- Define dozer mapper. -->
-    <bean id="dozerBeanMapper" class="org.dozer.DozerBeanMapper">
+    <bean id="dozerBeanMapper" class="org.dozer.DozerBeanMapper" >
         <property name="mappingFiles">
             <list>
                 <value>dozermapper/residentmapper.xml</value>

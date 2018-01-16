@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,6 +31,12 @@ public class CustomizedWebBindingInitializer implements WebBindingInitializer {
     public void onInit() {
         System.out.println(
                 "Initializing com.makebono.mavenplayland.module_test.common.utils.CustomizedWebBindingInitializer, BOO!");
+    }
+
+    @PreDestroy
+    public void onDestroy() {
+        System.err.println(
+                "-----------------------------------------------------------------------------------------------い、命だけはっ！！ぎゃーーー-----------------------------------------------------------------------------------------------");
     }
 
     @Override

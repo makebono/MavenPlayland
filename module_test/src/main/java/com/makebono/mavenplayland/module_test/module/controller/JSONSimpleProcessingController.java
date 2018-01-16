@@ -2,6 +2,8 @@ package com.makebono.mavenplayland.module_test.module.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +21,8 @@ import com.makebono.mavenplayland.module_test.module.service.JsonProcessingServi
 @RequestMapping("/jsonSimpleTest")
 @Controller
 public class JSONSimpleProcessingController {
+    private static final Logger logger = LoggerFactory.getLogger(JSONSimpleProcessingController.class);
+
     @Autowired
     private JsonProcessingService service;
 
@@ -26,17 +30,32 @@ public class JSONSimpleProcessingController {
     @ResponseBody
     public String write(final HttpServletRequest request) {
         final String fileName = request.getParameter("path");
-        service.writeJsonFile(fileName);
 
-        return "Json file wrote as " + fileName;
+        logger.info("Writting file to '/outputs/" + fileName + "'");
+        try {
+            service.writeJsonFile(fileName);
+            return "Json file wrote as " + fileName;
+        }
+        catch (final Exception e) {
+            System.out.println("Error occurs, message: " + e.getMessage());
+            return null;
+        }
     }
 
     @RequestMapping("/read")
     @ResponseBody
     public String read(final HttpServletRequest request) {
         final String fileName = request.getParameter("path");
-        final String result = service.parseJsonFile(fileName);
-        System.out.println(result);
-        return result;
+
+        logger.info("Reading file from '/outputs/" + fileName + "'");
+        try {
+            final String result = service.parseJsonFile(fileName);
+            System.out.println(result);
+            return result;
+        }
+        catch (final Exception e) {
+            System.out.println("Error occurs, message: " + e.getMessage());
+            return null;
+        }
     }
 }
