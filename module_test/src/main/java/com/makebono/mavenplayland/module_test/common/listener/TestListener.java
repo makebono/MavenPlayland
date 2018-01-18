@@ -22,7 +22,12 @@ public class TestListener implements ApplicationListener<ApplicationEvent> {
     @Override
     public void onApplicationEvent(final ApplicationEvent event) {
         if (event instanceof TestEvent) {
-            ((TestEvent) event).initEvent();
+            System.err.println(
+                    "------------------------------------------------------------------------------------Event created.------------------------------------------------------------------------------------");
+            System.err.println("=====>> New TestEvent created. <<=====");
+            System.err.println((TestEvent) event);
+            System.err.println(
+                    "----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
         }
 
         // Triggered on closing context.
