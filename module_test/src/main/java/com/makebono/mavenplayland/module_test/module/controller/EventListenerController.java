@@ -33,7 +33,7 @@ public class EventListenerController {
         return message;
     }
 
-    // After closing container, console would not react to any of the method in this class except the refresh method.
+    // After closing context, console would not react to any of the method in this class except the refresh method.
     @RequestMapping(value = "/close", method = { RequestMethod.POST, RequestMethod.GET })
     @ResponseBody
     public String closeEvent(final HttpServletRequest request) {
@@ -51,7 +51,7 @@ public class EventListenerController {
         return message;
     }
 
-    // Reload beans.
+    // Reload context.
     @RequestMapping(value = "/refresh", method = { RequestMethod.POST, RequestMethod.GET })
     @ResponseBody
     public String refreshEvent(final HttpServletRequest request) {
