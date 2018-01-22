@@ -26,7 +26,7 @@
         <artifactId>algorithms</artifactId>  
         <version>1.0</version>  
         <scope>system</scope>  
-        <systemPath>D:\maven\M2\com\makebono\algorithms\Algorithms.jar</systemPath>  
+        <systemPath>D:\workspace\MavenPlayland\web_test\src\main\webapp\WEB-INF\lib\Algorithms.jar</systemPath>  
     </dependency>  
   
     <dependency>
