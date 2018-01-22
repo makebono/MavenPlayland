@@ -28,7 +28,7 @@
             <param-value>classpath*:dispatcher.xml</param-value>
         </init-param>
 
-        <load-on-startup>1</load-on-startup>
+        <load-on-startup>1</load-on-startup> 
     </servlet>
     <servlet-mapping>
         <servlet-name>SpringMVC_Dispatcher</servlet-name>
