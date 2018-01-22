@@ -22,7 +22,16 @@
     	<groupId>com.makebono</groupId>
     	<artifactId>module_test</artifactId>
     	<version>0.0.1-SNAPSHOT</version>
-    </dependency>
+    </dependency>    
+
+    <dependency>  
+        <groupId>com.makebono</groupId>  
+        <artifactId>algorithms</artifactId>  
+        <version>1.0</version>  
+        <scope>system</scope>  
+        <systemPath>D:\maven\M2\com\makebono\algorithms\Algorithms.jar</systemPath>  
+    </dependency>   
+    
   </dependencies>
   <build>
     <finalName>web_test</finalName>

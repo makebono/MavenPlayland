@@ -39,7 +39,7 @@
     
     <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
         <property name="host" value="xxxxxx.xxxxxx.com"/>
-        <property name="port" value="***"/>
+        <property name="port" value="587"/>
         <property name="username" value="xxxxxx@xxxxxx.com"/>
         <property name="password" value="*******"/>
         <property name="javaMailProperties">

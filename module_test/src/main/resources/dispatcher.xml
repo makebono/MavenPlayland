@@ -14,7 +14,7 @@
         http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd   
         http://www.springframework.org/schema/tx   
         http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">     
-        
+           
     <!-- Be careful about this. If you used mvc:annotation-driven, then must add this bean here. Since
          annotation-driven will automatically load RequestMappingHandlerAdapter bean, so load it here is
          a must if using customized binding initializer. -->

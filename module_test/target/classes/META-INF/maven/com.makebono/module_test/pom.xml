@@ -9,4 +9,15 @@
   <packaging>jar</packaging>
   <artifactId>module_test</artifactId>
   <name>module_test</name>
+  
+  <dependencies> 
+      <dependency>  
+        <groupId>com.makebono</groupId>  
+        <artifactId>algorithms</artifactId>  
+        <version>1.0</version>  
+        <scope>system</scope>  
+        <systemPath>D:\maven\M2\com\makebono\algorithms\Algorithms.jar</systemPath>  
+    </dependency>  
+  </dependencies>  
+  
 </project>
