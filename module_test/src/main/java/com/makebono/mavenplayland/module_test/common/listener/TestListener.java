@@ -25,7 +25,7 @@ public class TestListener implements ApplicationListener<ApplicationEvent> {
             System.err.println(
                     "------------------------------------------------------------------------------------Event created.------------------------------------------------------------------------------------");
             System.err.println("=====>> New TestEvent created. <<=====");
-            System.err.println((TestEvent) event);
+            ((TestEvent) event).initEvent();
             System.err.println(
                     "----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
         }
