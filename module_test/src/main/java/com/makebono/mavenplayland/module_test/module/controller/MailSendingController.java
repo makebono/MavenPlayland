@@ -32,8 +32,7 @@ public class MailSendingController {
     @ResponseBody
     public String sendMail(final HttpServletRequest request, final HttpServletResponse response) {
         // Do not forget 'from' parameter. At least for hotmail, this is mandatory.
-        final String from = request.getParameter("from");
-
+        final String from = "xxxxxx@xxxxxx.com";
         final String to = request.getParameter("to");
         final String subject = request.getParameter("subject");
         final String body = request.getParameter("body");

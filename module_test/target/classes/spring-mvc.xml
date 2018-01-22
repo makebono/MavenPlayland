@@ -35,13 +35,13 @@
         <property name="prefix" value="/views/" />
         <property name="suffix" value=".jsp" />
         <property name="order" value="1" />
-    </bean>           
+    </bean>                 
     
     <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-        <property name="host" value="smtp-mail.outlook.com"/>
-        <property name="port" value="587"/>
-        <property name="username" value="xxxxxxx@hotmail.com"/>
-        <property name="password" value="xxxxxxx"/>
+        <property name="host" value="xxxxxx.xxxxxx.com"/>
+        <property name="port" value="***"/>
+        <property name="username" value="xxxxxx@xxxxxx.com"/>
+        <property name="password" value="*******"/>
         <property name="javaMailProperties">
             <props>
                 <prop key="mail.transport.protocol">smtp</prop>
@@ -49,7 +49,7 @@
                 <prop key="mail.smtp.starttls.enable">true</prop>
                 <prop key="mail.debug">true</prop>                 
             </props>
-        </property>
-    </bean>
+        </property> 
+    </bean> 
     
 </beans>  
