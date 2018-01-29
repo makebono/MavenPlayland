@@ -17,5 +17,8 @@
     <!-- <import resource="xxx.xml" /> : Use this to import defined beans from specific configuration xml files. Remember this is in application context, not in dispatcher configuration. -->
     <import resource="student.xml" />  
     <import resource="microarchitecture.xml" />  
+    
+    <!-- Customized HandlerInterceptorAdapter -->
+    <bean id="bonoInterceptorHandler" class="com.makebono.mavenplayland.module_test.common.interceptorhandler.BonoInterceptorHandler" />
       
 </beans>  

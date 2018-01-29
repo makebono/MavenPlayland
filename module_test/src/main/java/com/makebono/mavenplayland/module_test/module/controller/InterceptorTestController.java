@@ -12,25 +12,26 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.makebono.mavenplayland.module_test.module.service.DoomsdayService;
 
 /** 
- * @ClassName: WhatDayIsItController 
- * @Description: Simply add my other works into my spring project.
+ * @ClassName: InterceptorTestController 
+ * @Description: Controller for interceptor test
  * @author makebono
- * @date 2018年1月22日 上午11:21:41 
+ * @date 2018年1月29日 下午2:13:13 
  *  
  */
 @Controller
-public class WhatDayIsItController {
-    private static final Logger logger = LoggerFactory.getLogger(WhatDayIsItController.class);
+@RequestMapping("/interceptorTest")
+public class InterceptorTestController {
+    private static final Logger logger = LoggerFactory.getLogger(InterceptorTestController.class);
 
     @Autowired
     private DoomsdayService service;
 
-    @RequestMapping("/doomsdayTest")
+    @RequestMapping("/date")
     @ResponseBody
     public String doomsday(final HttpServletRequest request) {
-        final String date = request.getParameter("date");
+        final String date = (String) request.getAttribute("date");
 
-        logger.info("Querying date: " + date);
+        logger.info("Querying current date: " + date);
         try {
             final String dayInWeek = this.service.doomsday(date);
             System.out.println(dayInWeek);
