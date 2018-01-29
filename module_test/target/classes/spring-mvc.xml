@@ -28,7 +28,7 @@
                 <value>dozermapper/residentmapper.xml</value>
             </list>
         </property>
-    </bean>
+    </bean>     
     
     <bean
         class="org.springframework.web.servlet.view.InternalResourceViewResolver">

@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 
 /** 
  * @Classname: BCResident 
- * @Description: A pojo for Dozer mappting testing. Along with Resident with direct mapping.
+ * @Description: A pojo for Dozer mapping testing. Along with Resident with direct mapping.
  * @author makebono
  * @date 2018年1月10日 上午10:09:00 
  *  

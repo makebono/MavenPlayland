@@ -42,7 +42,15 @@
     
     <!-- Customized initialzation and destruction control -->
     <bean class="com.makebono.mavenplayland.module_test.common.system.InitializationAndDestructionManager" 
-        init-method="bonoInit" destroy-method="bonoDestroy"></bean>           
+        init-method="bonoInit" destroy-method="bonoDestroy"></bean>                
+
+    <!-- Bind specific HandlerInterceptorAdapter to a certain path -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/interceptorTest/*"/>
+            <ref bean="bonoInterceptorHandler"/>
+        </mvc:interceptor>    
+    </mvc:interceptors>       
     
     <mvc:annotation-driven />
     <!-- <context:annotation-config></context:annotation-config> -->
