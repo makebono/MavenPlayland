@@ -78,6 +78,18 @@ public class AOPTestController {
         return "n = " + n + ", fib(n+1) = " + result;
     }
 
+    // This step will be handled by 2 handler following the pre-set order. Output would be fib((n+1)*2). Easy to check
+    // the correctness.
+    @RequestMapping("/testAround3")
+    @ResponseBody
+    public String testAroundDoubleNextFib(final HttpServletRequest request) {
+        final int n = Integer.valueOf(request.getParameter("n"));
+        logger.info("Calculating (n+1)*2 Fibonacci value, n = " + n);
+
+        final long result = this.service.fibonacci2(n);
+        return "n = " + n + ", fib((n+1)*2) = " + result;
+    }
+
     @RequestMapping("/testReturn")
     @ResponseBody
     public String testReturn(final HttpServletRequest request) {
