@@ -1,3 +1,28 @@
+/**Note:
+ * It's important to know the format of Point cut.
+ * For example, 
+ *     @After("execution(* com.makebono.mavenplayland.module_test.module.service.AlgorithmService.toh(..))")
+ *     -> first * means any return type.
+ *     -> (..) as .toh's parameter means any parameter parsed in.
+ *     -> If wrote as AlgorithmService.*(..), it means any method in the class. Same idea for * at class/package layer.
+ *     
+ * Annotation @Order(n) decides order of Aspects to be execured.
+ * 
+ * joinPoint.proceed(args) works recursively.  
+ * For example, both of the method testAroundWithParameter2() here(order(0)) and in order(1), they print the value of n after
+ * handling. It works like below:
+ *     Order(0)
+ *     print: Initial input n = [6]
+ *     parse: (6+1)
+ *         Order(1)
+ *         print: Initial input n = [7]
+ *         print: Request intercepted by com.makebono.mavenplayland.module_test.common.system.aopaspect.BonoAspectOrder1, value of n after handling: 14
+ *         return: fib(7*2)
+ *     Order(0)                   
+ *     print: Request intercepted by com.makebono.mavenplayland.module_test.common.system.aopaspect.BonoAspectOrder0, value of n after handling: 7
+ *     return: fib(7*2)  
+
+ */
 package com.makebono.mavenplayland.module_test.common.system.aopaspect;
 
 import java.util.Arrays;
@@ -10,6 +35,7 @@ import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.springframework.core.annotation.Order;
 
 /** 
  * @ClassName: BonoAspect 
@@ -19,10 +45,11 @@ import org.aspectj.lang.annotation.Before;
  *  
  */
 @Aspect
-public class BonoAspect {
+@Order(0)
+public class BonoAspectOrder0 {
     static {
         System.out.println(
-                "@Aspect com.makebono.mavenplayland.module_test.common.system.aopaspect.BonoAspect initialzed.");
+                "@Aspect com.makebono.mavenplayland.module_test.common.system.aopaspect.BonoAspectOrder0 initialzed.");
     }
 
     @Before("execution(* com.makebono.mavenplayland.module_test.module.service.AlgorithmService.toh(..))")
@@ -67,6 +94,25 @@ public class BonoAspect {
             final long result = (long) joinPoint.proceed(args);
             System.out.println("Pointcut intercepted, fib(n+1) = " + result);
             System.out.println("AOP @Around annotation after: " + joinPoint.getSignature().getName());
+            return result;
+
+        }
+        catch (final Throwable e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    @Around("execution(* com.makebono.mavenplayland.module_test.module.service.AlgorithmService.fibonacci2(..))")
+    public long testAroundWithParameter2(final ProceedingJoinPoint joinPoint) {
+
+        try {
+            final Object[] args = joinPoint.getArgs();
+            System.out.println("Initial input n = " + Arrays.toString(args));
+            args[0] = (int) (args[0]) + 1;
+            final long result = (long) joinPoint.proceed(args);
+            System.out.println(
+                    "Request intercepted by " + this.getClass().getName() + ", value of n after handling: " + args[0]);
             return result;
 
         }

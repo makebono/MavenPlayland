@@ -1,10 +1,3 @@
-/**   
- * @Title: TOHService.java 
- * @Package com.makebono.mavenplayland.module_test.module.service 
- * @Description: TODO(用一句话描述该文件做什么) 
- * @author tangxj
- * @date 2018年1月29日 下午5:28:56  
- */
 package com.makebono.mavenplayland.module_test.module.service;
 
 import java.io.IOException;
@@ -41,6 +34,10 @@ public class AlgorithmService {
     }
 
     public long fibonacci(final int n) {
+        return DPFibonacci.tableAidedImplement(n).longValue();
+    }
+
+    public long fibonacci2(final int n) {
         return DPFibonacci.tableAidedImplement(n).longValue();
     }
 
