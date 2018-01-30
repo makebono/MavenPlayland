@@ -12,7 +12,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.support.WebBindingInitializer;
-import org.springframework.web.context.request.WebRequest;
 
 import com.makebono.mavenplayland.module_test.module.entities.Student;
 
@@ -40,7 +39,7 @@ public class CustomizedWebBindingInitializer implements WebBindingInitializer {
     }
 
     @Override
-    public void initBinder(final WebDataBinder binder, final WebRequest req) {
+    public void initBinder(final WebDataBinder binder) {
         binder.registerCustomEditor(Student.class, new PropertyEditorSupport() {
             @Override
             public void setAsText(final String input) {

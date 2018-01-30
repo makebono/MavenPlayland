@@ -21,6 +21,8 @@
     <!-- Ok to nestedly loading beans, check inside beans.xml file -->
     <import resource="beans.xml" />    
     
+    <aop:aspectj-autoproxy />        
+    
     <!-- Define dozer mapper. -->
     <bean id="dozerBeanMapper" class="org.dozer.DozerBeanMapper" >
         <property name="mappingFiles">

@@ -1,0 +1,55 @@
+/**   
+ * @Title: TOHService.java 
+ * @Package com.makebono.mavenplayland.module_test.module.service 
+ * @Description: TODO(用一句话描述该文件做什么) 
+ * @author tangxj
+ * @date 2018年1月29日 下午5:28:56  
+ */
+package com.makebono.mavenplayland.module_test.module.service;
+
+import java.io.IOException;
+import java.security.InvalidParameterException;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.makebono.algorithms.backtracking.EightQueens;
+import com.makebono.algorithms.dynamicprogramming.fibonacci.DPFibonacci;
+import com.makebono.algorithms.dynamicprogramming.towerofhanoi.TowerOfHanoi;
+
+/** 
+ * @ClassName: AlgorithmService 
+ * @Description: Service invoking algorithms.
+ * @author makebono
+ * @date 2018年1月29日 下午5:28:56 
+ *  
+ */
+@Service
+public class AlgorithmService {
+
+    @Autowired
+    private DoomsdayService doomsdayService;
+
+    public void toh(final int home, final int target, final int level) throws IOException {
+        final TowerOfHanoi toh = new TowerOfHanoi(level);
+        toh.game(home, target);
+    }
+
+    public String eightQueens() {
+        final String result = EightQueens.solve();
+        return result;
+    }
+
+    public long fibonacci(final int n) {
+        return DPFibonacci.tableAidedImplement(n).longValue();
+    }
+
+    public String doomsday(final String date) throws InvalidParameterException {
+        try {
+            return this.doomsdayService.doomsday(date);
+        }
+        catch (final Exception e) {
+            throw new InvalidParameterException("Invalid input. Please double check.");
+        }
+    }
+}

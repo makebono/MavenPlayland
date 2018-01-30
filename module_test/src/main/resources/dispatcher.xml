@@ -51,15 +51,19 @@
             <ref bean="bonoInterceptorHandler"/>
         </mvc:interceptor>    
     </mvc:interceptors>       
-    
     <mvc:annotation-driven />
     <!-- <context:annotation-config></context:annotation-config> -->
 
     <!-- package needs to be scanned -->
-    <context:component-scan base-package="com.makebono.mavenplayland.module_test">
+    <context:component-scan base-package="com.makebono.mavenplayland.module_test.module.controller, 
+        com.makebono.mavenplayland.module_test.module.service, 
+        com.makebono.mavenplayland.module_test.common.annotations,
+        com.makebono.mavenplayland.module_test.common.system.aopaspect">
     <!-- scan for classes annotated as service or controller -->    
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Component"/>
+        <context:include-filter type="annotation" expression="org.aspectj.lang.annotation.Aspect"/>
         <context:exclude-filter type="annotation" expression="com.makebono.mavenplayland.module_test.common.annotations.DontAutowireMe"/>
     </context:component-scan>       
 </beans>  
