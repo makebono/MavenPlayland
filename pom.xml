@@ -42,6 +42,14 @@
         <version>2.9.3</version>
     </dependency>
     
+    <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-xml -->
+    <dependency>
+        <groupId>com.fasterxml.jackson.dataformat</groupId>
+        <artifactId>jackson-dataformat-xml</artifactId>
+        <version>2.9.3</version>
+    </dependency>
+    
+    
     <dependency>
         <groupId>org.codehaus.jackson</groupId>
         <artifactId>jackson-mapper-asl</artifactId>
@@ -61,6 +69,14 @@
         <version>${spring.version}</version>
     </dependency>
     
+    <!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-jdbc</artifactId>
+        <version>${spring.version}</version>
+    </dependency>
+    
+    
     <!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
     <dependency>
         <groupId>org.springframework</groupId>
@@ -72,6 +88,30 @@
     <dependency>
         <groupId>org.springframework</groupId>
         <artifactId>spring-aop</artifactId>
+        <version>${spring.version}</version>
+    </dependency>
+    
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-orm</artifactId>
+        <version>${spring.version}</version>
+    </dependency>
+    
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-oxm</artifactId>
+        <version>${spring.version}</version>
+    </dependency>
+
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-tx</artifactId>
+        <version>${spring.version}</version>
+    </dependency>
+    
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-web</artifactId>
         <version>${spring.version}</version>
     </dependency>
     
@@ -174,12 +214,6 @@
         <version>1.2.2</version>
     </dependency>
     
-    <dependency>
-        <groupId>com.alibaba</groupId>
-        <artifactId>druid</artifactId>
-        <version>0.2.23</version>
-    </dependency>
-    
     <!-- https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple -->
     <dependency>
         <groupId>com.googlecode.json-simple</groupId>
@@ -200,6 +234,21 @@
         <artifactId>aspectjweaver</artifactId>
         <version>${aspectj.version}</version>
     </dependency>
+    
+    <!-- https://mvnrepository.com/artifact/tk.mybatis/mapper -->
+    <dependency>
+        <groupId>tk.mybatis</groupId>
+        <artifactId>mapper</artifactId>
+        <version>3.5.2</version>
+    </dependency>
+    
+    <!-- https://mvnrepository.com/artifact/com.alibaba/druid -->
+    <dependency>
+        <groupId>com.alibaba</groupId>
+        <artifactId>druid</artifactId>
+        <version>1.1.6</version>
+    </dependency>
+    
     
     
   </dependencies>
