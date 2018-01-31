@@ -1,6 +1,5 @@
 package com.makebono.mavenplayland.module_test.module.service;
 
-import java.io.IOException;
 import java.security.InvalidParameterException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +22,13 @@ public class AlgorithmService {
     @Autowired
     private DoomsdayService doomsdayService;
 
-    public void toh(final int home, final int target, final int level) throws IOException {
-        final TowerOfHanoi toh = new TowerOfHanoi(level);
-        toh.game(home, target);
+    public void toh(final int home, final int target, final int level) throws Throwable {
+        if (home != target && home < 4 && home > 0 && target < 4 && target > 0) {
+            final TowerOfHanoi toh = new TowerOfHanoi(level);
+            toh.game(home, target);
+            return;
+        }
+        throw new IllegalArgumentException("Invalid input, please check parameters' range and order.");
     }
 
     public String eightQueens() {

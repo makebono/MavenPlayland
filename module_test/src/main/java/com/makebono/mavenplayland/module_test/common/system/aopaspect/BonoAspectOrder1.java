@@ -40,4 +40,24 @@ public class BonoAspectOrder1 {
         }
     }
 
+    // Intercept all service and do something.
+    @Around("execution(* com.makebono.mavenplayland.module_test.module.service.*Service.*(..))")
+    public Object globalRuleCheckingAdvice(final ProceedingJoinPoint joinPoint) throws Throwable {
+        final Object[] args = joinPoint.getArgs();
+        System.out.println("Number of input parameters = " + args.length);
+        final Object result;
+
+        try {
+            result = joinPoint.proceed(args);
+        }
+        catch (final Exception e) {
+            System.out.println("Error occurs, message: " + e.getMessage() + "\nRequest intercepted by "
+                    + this.getClass().getName() + ", service failed.");
+            throw e;
+        }
+
+        System.out.println("Request intercepted by " + this.getClass().getName() + ", service correctly executed.");
+        return result;
+    }
+
 }

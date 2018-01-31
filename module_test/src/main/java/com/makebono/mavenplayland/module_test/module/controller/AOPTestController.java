@@ -1,7 +1,5 @@
 package com.makebono.mavenplayland.module_test.module.controller;
 
-import java.io.IOException;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -33,7 +31,7 @@ public class AOPTestController {
 
     @RequestMapping("/test")
     @ResponseBody
-    public String testBefore(final HttpServletRequest request) {
+    public String testBefore(final HttpServletRequest request) throws Throwable {
         final int home = Integer.valueOf(request.getParameter("home"));
         final int target = Integer.valueOf(request.getParameter("target"));
         final int level = Integer.valueOf(request.getParameter("level"));
@@ -42,12 +40,11 @@ public class AOPTestController {
 
         try {
             this.service.toh(home, target, level);
-            return "Problem solved, check output file.";
         }
-        catch (final IOException e) {
-            e.printStackTrace();
-            return null;
+        catch (final Exception e) {
+            return "Error occurs, message: " + e.getMessage();
         }
+        return "Problem solved, check output file.";
     }
 
     @RequestMapping("/test2")
@@ -63,8 +60,13 @@ public class AOPTestController {
     @ResponseBody
     public String testAround(final HttpServletRequest request) {
         logger.info("Trying to solve Eight Queens problem.");
-
-        final String result = this.service.eightQueens();
+        final String result;
+        try {
+            result = this.service.eightQueens();
+        }
+        catch (final Exception e) {
+            return "Error occurs, message: " + e.getMessage();
+        }
         return "Eight queens solution: " + result;
     }
 
@@ -74,7 +76,14 @@ public class AOPTestController {
         final int n = Integer.valueOf(request.getParameter("n"));
         logger.info("Calculating n+1 Fibonacci value, n = " + n);
 
-        final long result = this.service.fibonacci(n);
+        final long result;
+        try {
+            result = this.service.fibonacci(n);
+        }
+        catch (final Exception e) {
+            return "Error occurs, message: " + e.getMessage();
+        }
+
         return "n = " + n + ", fib(n+1) = " + result;
     }
 
@@ -86,7 +95,14 @@ public class AOPTestController {
         final int n = Integer.valueOf(request.getParameter("n"));
         logger.info("Calculating (n+1)*2 Fibonacci value, n = " + n);
 
-        final long result = this.service.fibonacci2(n);
+        final long result;
+        try {
+            result = this.service.fibonacci2(n);
+        }
+        catch (final Exception e) {
+            return "Error occurs, message: " + e.getMessage();
+        }
+
         return "n = " + n + ", fib((n+1)*2) = " + result;
     }
 
@@ -95,15 +111,18 @@ public class AOPTestController {
     public String testReturn(final HttpServletRequest request) {
         final String date = request.getParameter("date");
         logger.info("Calculating day in a week of input date = " + date);
+
+        final String result;
         try {
-            final String result = this.service.doomsday(date);
+            result = this.service.doomsday(date);
             System.out.println(result);
-            return result;
         }
         catch (final Exception e) {
             System.out.println("Error occurs, message: " + e.getMessage());
             return "Error occurs, please don't contact the author since it must be your fault.";
         }
+
+        return result;
     }
 
 }

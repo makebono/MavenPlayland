@@ -30,7 +30,7 @@ public class AOPTest {
         component.yield();
     }
 
-    public static void test2() throws IOException {
+    public static void test2() throws Throwable {
         final AlgorithmService service = context.getBean(AlgorithmService.class);
         service.toh(1, 3, 3);
     }
