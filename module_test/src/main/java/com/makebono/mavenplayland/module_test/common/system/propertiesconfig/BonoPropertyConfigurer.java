@@ -22,6 +22,8 @@ public class BonoPropertyConfigurer extends PropertySourcesPlaceholderConfigurer
         System.out.println(BonoPropertyConfigurer.class.getName() + " is on.");
     }
 
+    // Watch out, for Spring correctly parsing the parameter, this kind of setter of parameter p must be named as
+    // setP(p).
     public void setConfigFiles(final Set<String> configFiles) {
         final Properties properties = new Properties();
 
