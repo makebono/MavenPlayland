@@ -1,9 +1,6 @@
 package com.makebono.mavenplayland.module_test.module.entities;
 
-import javax.persistence.Access;
-import javax.persistence.AccessType;
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -15,8 +12,6 @@ import javax.persistence.Table;
  *  
  */
 
-@Access(AccessType.FIELD)
-@Entity
 @Table(name = "maven_test2")
 public class MicroArchitecture {
     @Id

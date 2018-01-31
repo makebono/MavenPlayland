@@ -1,9 +1,8 @@
 package com.makebono.mavenplayland.module_test.module.entities;
 
-import javax.persistence.Access;
-import javax.persistence.AccessType;
 import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -15,12 +14,11 @@ import javax.persistence.Table;
  *  
  */
 
-@Access(AccessType.FIELD)
-@Entity
 @Table(name = "maven_test")
 public class Student {
     @Id
     @Column(name = "ID", columnDefinition = "BIGINT")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long ID;
 
     @Column(name = "GIVENNAME", columnDefinition = "VARCHAR")
