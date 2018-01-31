@@ -42,23 +42,24 @@
     
     <!-- Customized initialzation and destruction control -->
     <bean class="com.makebono.mavenplayland.module_test.common.system.InitializationAndDestructionManager" 
-        init-method="bonoInit" destroy-method="bonoDestroy"></bean>                
+        init-method="bonoInit" destroy-method="bonoDestroy"></bean>      
 
     <!-- Bind specific HandlerInterceptorAdapter to a certain path -->
     <mvc:interceptors>
         <mvc:interceptor>
-            <mvc:mapping path="/interceptorTest/*"/>
-            <ref bean="bonoInterceptorHandler"/>
+            <mvc:mapping path="${intercepted.path}" />
+            <ref bean="bonoInterceptorHandler" />
         </mvc:interceptor>    
     </mvc:interceptors>       
     <mvc:annotation-driven />
     <!-- <context:annotation-config></context:annotation-config> -->
 
     <!-- package needs to be scanned -->
-    <context:component-scan base-package="com.makebono.mavenplayland.module_test.module.controller, 
-        com.makebono.mavenplayland.module_test.module.service, 
+    <context:component-scan base-package="com.makebono.mavenplayland.module_test.module.controller,
+        com.makebono.mavenplayland.module_test.module.service,
         com.makebono.mavenplayland.module_test.common.annotations,
-        com.makebono.mavenplayland.module_test.common.system.aopaspect">
+        com.makebono.mavenplayland.module_test.common.system.aopaspect,
+        com.makebono.mavenplayland.module_test.common.listener" >
     <!-- scan for classes annotated as service or controller -->    
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
