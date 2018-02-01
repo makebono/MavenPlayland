@@ -1,4 +1,4 @@
-package com.makebono.mavenplayland.module_test.common.basesqlmapperservice;
+package com.makebono.mavenplayland.module_test.common.service;
 
 import java.util.List;
 
@@ -9,7 +9,6 @@ import tk.mybatis.mapper.common.Mapper;
 /**
  * Created by liuzh on 2014/12/11.
  */
-
 public abstract class BaseMapperService<T> {
 
     @Autowired
@@ -20,12 +19,19 @@ public abstract class BaseMapperService<T> {
     }
 
     public T selectByKey(final Object key) {
-        final T result = mapper.selectByPrimaryKey(key);
-        return result;
+        return mapper.selectByPrimaryKey(key);
     }
 
-    public int save(final T entity) {
-        return mapper.insert(entity);
+    public T selectOne(final T record) {
+        return mapper.selectOne(record);
+    }
+
+    public List<T> select(final T record) {
+        return mapper.select(record);
+    }
+
+    public int save(final T record) {
+        return mapper.insert(record);
     }
 
     public List<T> selectAll() {

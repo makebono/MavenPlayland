@@ -1,8 +1,6 @@
 package com.makebono.mavenplayland.module_test.module.entities;
 
 import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -16,10 +14,11 @@ import javax.persistence.Table;
 
 @Table(name = "maven_test")
 public class Student {
+    // If type of ID was long, will cause some strange type convert problem. For example all record got by selectAll
+    // will have ID = 0, and SelectByPrimary key won't work. Gotta be careful.
     @Id
     @Column(name = "ID", columnDefinition = "BIGINT")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long ID;
+    private Long ID;
 
     @Column(name = "GIVENNAME", columnDefinition = "VARCHAR")
     private String GIVENNAME;

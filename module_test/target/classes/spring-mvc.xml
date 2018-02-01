@@ -50,7 +50,7 @@
         <property name="dataSource" ref="dataSource"/>
         <property name="mapperLocations">
             <array>
-                <value>classpath:sqlmap/*.xml</value>
+                <value>classpath*:sqlmap/*.xml</value>
             </array>
         </property>
         <property name="typeAliasesPackage" value="com.makebono.mavenplayland.module_test.module.entities"/>
