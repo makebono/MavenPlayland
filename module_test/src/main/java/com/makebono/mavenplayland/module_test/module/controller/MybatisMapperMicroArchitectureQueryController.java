@@ -36,11 +36,11 @@ public class MybatisMapperMicroArchitectureQueryController {
         logger.info("Select one from maven_test with key(" + key + ")");
         try {
             final MicroArchitecture result = this.service.selectByKey(key);
-
+            logger.info("Query complete, result is:\n    " + result);
             return result;
         }
         catch (final Exception e) {
-            System.out.println("Error occurs, message: " + e.getMessage());
+            logger.info("Error occurs, message: " + e.getMessage());
             return null;
         }
     }
@@ -52,9 +52,14 @@ public class MybatisMapperMicroArchitectureQueryController {
         try {
             final List<MicroArchitecture> result = this.service.selectAll();
 
+            for (final MicroArchitecture candidate : result) {
+                logger.info(candidate.toString());
+            }
+
             return result;
         }
         catch (final Exception e) {
+            logger.info("Error occurs, message: " + e.getMessage());
             System.out.println("Error occurs, message: " + e.getMessage());
             return null;
         }
@@ -74,9 +79,11 @@ public class MybatisMapperMicroArchitectureQueryController {
         logger.info("Insert into table: " + brand + " " + core + " " + model);
         try {
             this.service.save(candidate);
+            logger.info(candidate + "\nInsert success");
             return candidate + "\nInsert success";
         }
         catch (final Exception e) {
+            logger.info("Error occurs, message: " + e.getMessage());
             return "Error occurs, message: " + e.getMessage();
         }
     }
@@ -89,9 +96,11 @@ public class MybatisMapperMicroArchitectureQueryController {
         logger.info("Delete from table: " + key);
         try {
             this.service.delete(key);
+            logger.info("Entity with id(" + key + ") removed from table");
             return "Entity with id(" + key + ") removed from table";
         }
         catch (final Exception e) {
+            logger.info("Error occurs, message: " + e.getMessage());
             return "Error occurs, message: " + e.getMessage();
         }
     }

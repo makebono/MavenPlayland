@@ -2,7 +2,7 @@ package com.makebono.mavenplayland.module_test.module.service;
 
 import org.springframework.stereotype.Service;
 
-import com.makebono.mavenplayland.module_test.common.basesqlmapperservice.BaseMapperService;
+import com.makebono.mavenplayland.module_test.common.service.BaseMapperService;
 import com.makebono.mavenplayland.module_test.module.entities.Student;
 
 /** 

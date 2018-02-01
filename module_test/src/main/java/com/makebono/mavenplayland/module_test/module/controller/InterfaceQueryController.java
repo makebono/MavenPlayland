@@ -50,7 +50,7 @@ public class InterfaceQueryController {
         this.service = service;
     }
     */
-    @RequestMapping(value = "/queryById", method = { RequestMethod.POST })
+    @RequestMapping(value = "/queryById")
     @ResponseBody
     public String queryById(final HttpServletRequest request) {
         final String id = request.getParameter("id");

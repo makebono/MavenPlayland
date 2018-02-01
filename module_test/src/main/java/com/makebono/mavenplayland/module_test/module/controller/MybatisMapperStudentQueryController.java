@@ -32,12 +32,12 @@ public class MybatisMapperStudentQueryController {
     @RequestMapping(value = "/selectOne", method = { RequestMethod.POST, RequestMethod.GET })
     @ResponseBody
     public Student selectOne(final HttpServletRequest request) {
-        // Type convert problem here, get it done.
+        // Type convert problem solved by changing type of ID to Long in Student class.
         final long key = Long.valueOf(request.getParameter("ID"));
         logger.info("Select one from maven_test with key(" + key + ")");
         try {
             final Student result = this.service.selectByKey(key);
-
+            logger.info("Query complete, result is:\n    " + result);
             return result;
         }
         catch (final Exception e) {
@@ -53,10 +53,14 @@ public class MybatisMapperStudentQueryController {
         try {
             final List<Student> result = this.service.selectAll();
 
+            for (final Student candidate : result) {
+                logger.info(candidate.toString());
+            }
+
             return result;
         }
         catch (final Exception e) {
-            System.out.println("Error occurs, message: " + e.getMessage());
+            logger.info("Error occurs, message: " + e.getMessage());
             return null;
         }
     }
@@ -78,9 +82,11 @@ public class MybatisMapperStudentQueryController {
         logger.info("Insert into table: " + id + " " + givenName + " " + surname + " " + university);
         try {
             this.service.save(candidate);
+            logger.info(candidate + "\nInsert success");
             return candidate + "\nInsert success";
         }
         catch (final Exception e) {
+            logger.info("Error occurs, message: " + e.getMessage());
             return "Error occurs, message: " + e.getMessage();
         }
     }
@@ -88,14 +94,16 @@ public class MybatisMapperStudentQueryController {
     @RequestMapping(value = "/delete", method = { RequestMethod.POST, RequestMethod.GET })
     @ResponseBody
     public String delete(final HttpServletRequest request) {
-        final String key = request.getParameter("id");
+        final long key = Long.valueOf(request.getParameter("ID"));
 
         logger.info("Delete from table: " + key);
         try {
             this.service.delete(key);
+            logger.info("Entity with id(" + key + ") removed from table");
             return "Entity with id(" + key + ") removed from table";
         }
         catch (final Exception e) {
+            logger.info("Error occurs, message: " + e.getMessage());
             return "Error occurs, message: " + e.getMessage();
         }
     }
