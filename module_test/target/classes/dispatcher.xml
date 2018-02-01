@@ -47,7 +47,7 @@
     <!-- Bind specific HandlerInterceptorAdapter to a certain path -->
     <mvc:interceptors>
         <mvc:interceptor>
-            <mvc:mapping path="${intercepted.path}" />
+            <mvc:mapping path="/interceptorTest/*" />
             <ref bean="bonoInterceptorHandler" />
         </mvc:interceptor>    
     </mvc:interceptors>       

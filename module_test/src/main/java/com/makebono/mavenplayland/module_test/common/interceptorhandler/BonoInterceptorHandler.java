@@ -16,6 +16,10 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
  *  
  */
 public class BonoInterceptorHandler extends HandlerInterceptorAdapter {
+    static {
+        System.out.println(BonoInterceptorHandler.class.getName() + " on your command.");
+    }
+
     @Override
     public boolean preHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler)
             throws Exception {
