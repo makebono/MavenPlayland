@@ -14,32 +14,7 @@
         http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd   
         http://www.springframework.org/schema/tx   
         http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">     
-           
-    <!-- Be careful about this. If you used mvc:annotation-driven, then must add this bean here. Since
-         annotation-driven will automatically load RequestMappingHandlerAdapter bean, so load it here is
-         a must if using customized binding initializer. -->
-    <!-- And don't forget to put this under DispatcherServlet's defined path. -->         
-    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
-        <!-- Binding input request -->
-        <property name="webBindingInitializer">
-            <!-- <bean class="com.makebono.mavenplayland.module_test.common.utils.CustomizedWebBindingInitializer" lazy-init = "true" />  --> 
-            <bean class="com.makebono.mavenplayland.module_test.common.utils.CustomizedWebBindingInitializer" /> 
-        </property>      
-    
-        <!-- Intepreting/Converting output type -->
-        <property name="messageConverters">
-            <list>
-                <!-- When multiple converters existing, a response would scan through converter list in top to bottom order as writting down below. -->
-                <!-- Better not use self defined converters along with Json. Some delicate conflicts, there are. -->
-                <!-- <bean class="com.makebono.mavenplayland.module_test.common.utils.DateResponseConverter"/>
-                <bean class="com.makebono.mavenplayland.module_test.common.utils.StudentResponseConverter"/>
-                <bean class="com.makebono.mavenplayland.module_test.common.utils.StringResponseConverter"/>
-                <bean class="com.makebono.mavenplayland.module_test.common.utils.ListResponseConverter"/> -->
-                <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/> 
-            </list>        
-        </property>           
-    </bean>   
-    
+        
     <!-- Customized initialzation and destruction control -->
     <bean class="com.makebono.mavenplayland.module_test.common.system.InitializationAndDestructionManager" 
         init-method="bonoInit" destroy-method="bonoDestroy"></bean>      
@@ -51,20 +26,5 @@
             <ref bean="bonoInterceptorHandler" />
         </mvc:interceptor>    
     </mvc:interceptors>       
-    <mvc:annotation-driven />
-    <!-- <context:annotation-config></context:annotation-config> -->
-
-    <!-- package needs to be scanned -->
-    <context:component-scan base-package="com.makebono.mavenplayland.module_test.module.controller,
-        com.makebono.mavenplayland.module_test.module.service,
-        com.makebono.mavenplayland.module_test.common.annotations,
-        com.makebono.mavenplayland.module_test.common.system.aopaspect,
-        com.makebono.mavenplayland.module_test.common.listener" >
-    <!-- scan for classes annotated as service or controller -->    
-        <context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
-        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
-        <context:include-filter type="annotation" expression="org.springframework.stereotype.Component"/>
-        <context:include-filter type="annotation" expression="org.aspectj.lang.annotation.Aspect"/>
-        <context:exclude-filter type="annotation" expression="com.makebono.mavenplayland.module_test.common.annotations.DontAutowireMe"/>
-    </context:component-scan>       
+    
 </beans>  

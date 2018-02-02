@@ -9,8 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.dubbo.config.annotation.Reference;
+import com.makebono.mavenplayland.module_test.module.dubbointerface.IAlgorithmDubboService;
 import com.makebono.mavenplayland.module_test.module.service.AOPTestComponent;
-import com.makebono.mavenplayland.module_test.module.service.AlgorithmService;
 
 /** 
  * @ClassName: AOPTestController 
@@ -21,10 +22,11 @@ import com.makebono.mavenplayland.module_test.module.service.AlgorithmService;
  */
 @Controller
 @RequestMapping("aop")
-public class AOPTestController {
-    private static final Logger logger = LoggerFactory.getLogger(AOPTestController.class);
-    @Autowired
-    private AlgorithmService service;
+public class DubboAOPTestController {
+    private static final Logger logger = LoggerFactory.getLogger(DubboAOPTestController.class);
+
+    @Reference(interfaceClass = IAlgorithmDubboService.class)
+    private IAlgorithmDubboService service;
 
     @Autowired
     private AOPTestComponent component;
