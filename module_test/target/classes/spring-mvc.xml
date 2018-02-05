@@ -131,9 +131,6 @@
         </property>           
     </bean>  
     
-    <mvc:annotation-driven />
-    <!-- <context:annotation-config></context:annotation-config> -->
-    
     <import resource="dubbo-config.xml" />    
     
 </beans>  
