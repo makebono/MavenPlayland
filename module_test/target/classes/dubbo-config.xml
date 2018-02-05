@@ -21,21 +21,6 @@
     <dubbo:registry id="reg" address="${dubbo.registry.address}"
         file="${dubbo.registry.file}" />
     
-    <dubbo:annotation package="
-    com.makebono.mavenplayland.module_test.module" />
-        
-    <context:component-scan base-package="com.makebono.mavenplayland.module_test.module.controller,
-        com.makebono.mavenplayland.module_test.module.service,
-        com.makebono.mavenplayland.module_test.common.service,
-        com.makebono.mavenplayland.module_test.common.annotations,
-        com.makebono.mavenplayland.module_test.common.system.aopaspect,
-        com.makebono.mavenplayland.module_test.common.listener" >
-    <!-- scan for classes annotated as service or controller -->    
-        <context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
-        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
-        <context:include-filter type="annotation" expression="org.springframework.stereotype.Component"/>
-        <context:include-filter type="annotation" expression="org.aspectj.lang.annotation.Aspect"/>
-        <context:exclude-filter type="annotation" expression="com.makebono.mavenplayland.module_test.common.annotations.DontAutowireMe"/>
-    </context:component-scan>   
+
     
 </beans>    
