@@ -4,6 +4,7 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.config.IniSecurityManagerFactory;
+import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.Factory;
 
@@ -15,10 +16,12 @@ import org.apache.shiro.util.Factory;
  *  
  */
 public abstract class AbstractLogIn {
-    protected static Subject login(final String config, final String userName, final String password) {
-        final Factory<org.apache.shiro.mgt.SecurityManager> factory = new IniSecurityManagerFactory(config);
+    protected static Subject login(final String configFile, final String userName, final String password) {
+        final Factory<SecurityManager> factory = new IniSecurityManagerFactory(configFile);
 
-        final org.apache.shiro.mgt.SecurityManager securityManager = factory.getInstance();
+        final SecurityManager securityManager = factory.getInstance();
+
+        // Security manager has singleton scope. Guarantees A manager per JVM running.
         SecurityUtils.setSecurityManager(securityManager);
 
         final Subject subject = SecurityUtils.getSubject();

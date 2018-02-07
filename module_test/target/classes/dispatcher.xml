@@ -64,6 +64,7 @@
     <context:component-scan base-package="com.makebono.mavenplayland.module_test.module.controller,
         com.makebono.mavenplayland.module_test.module.service,
         com.makebono.mavenplayland.module_test.common.service,
+        com.makebono.mavenplayland.module_test.common.system.security,
         com.makebono.mavenplayland.module_test.common.annotations,
         com.makebono.mavenplayland.module_test.common.system.aopaspect,
         com.makebono.mavenplayland.module_test.common.listener" >
@@ -73,5 +74,7 @@
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Component"/>
         <context:include-filter type="annotation" expression="org.aspectj.lang.annotation.Aspect"/>
         <context:exclude-filter type="annotation" expression="com.makebono.mavenplayland.module_test.common.annotations.DontAutowireMe"/>
-    </context:component-scan>       
+    </context:component-scan>   
+    
+    <bean class="com.makebono.mavenplayland.module_test.common.system.security.SecurityInfoCache" init-method="init"></bean>    
 </beans>  
