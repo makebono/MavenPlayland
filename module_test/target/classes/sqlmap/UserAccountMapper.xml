@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.makebono.mavenplayland.module_test.mapper.mybatismapper.UserAccountMapper">
+  <resultMap id="BaseResultMap" type="com.makebono.mavenplayland.module_test.module.entities.UserAccount">
+    <id column="ACCOUNT" property="ACCOUNT" jdbcType="VARCHAR" />
+    <result column="SECURITYKEY" property="SECURITYKEY" jdbcType="VARCHAR" />
+    <result column="ROLE" property="ROLE" jdbcType="VARCHAR" />
+  </resultMap>
+</mapper>

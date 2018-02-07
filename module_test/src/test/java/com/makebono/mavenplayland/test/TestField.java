@@ -5,6 +5,8 @@ import org.apache.log4j.LogManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.makebono.mavenplayland.test.shirotest.service.UserAccountConnector;
+
 /** 
  * @ClassName: TestField 
  * @Description: General test field
@@ -15,7 +17,7 @@ import org.slf4j.LoggerFactory;
 public class TestField {
     private static final Logger logger = LoggerFactory.getLogger(TestField.class);
 
-    public static void main(final String[] args) {
+    public static void debugGimmick() {
         LogManager.getRootLogger().setLevel(Level.DEBUG);
 
         if (logger.isDebugEnabled()) {
@@ -31,5 +33,9 @@ public class TestField {
         } else {
             logger.info("Debug is not enabled.");
         }
+    }
+
+    public static void main(final String[] args) {
+        System.out.println(UserAccountConnector.selectAll());
     }
 }

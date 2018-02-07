@@ -29,7 +29,7 @@ public class ShiroAuthenticatorTest {
 
         // Authenticate given username and password.
         final Subject subject = SecurityUtils.getSubject();
-        final UsernamePasswordToken token = new UsernamePasswordToken("marston", "006");
+        final UsernamePasswordToken token = new UsernamePasswordToken("fredfuchs", "000");
 
         subject.login(token);
     }
@@ -87,8 +87,13 @@ public class ShiroAuthenticatorTest {
         login("src/test/resources/shiro/shiro-authenticator-atLeastTwo-fail.ini");
     }
 
+    @Test
+    public void testDBRealm() {
+        login("src/test/resources/shiro/shiro-authenticator-db.ini");
+    }
+
     public static void main(final String[] args) {
         final ShiroAuthenticatorTest t = new ShiroAuthenticatorTest();
-        t.testAllSuccessfulStrategy_Fail();
+        t.testDBRealm();
     }
 }
