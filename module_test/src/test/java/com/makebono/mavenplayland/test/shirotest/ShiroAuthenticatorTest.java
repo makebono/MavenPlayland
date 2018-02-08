@@ -2,12 +2,11 @@ package com.makebono.mavenplayland.test.shirotest;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UnknownAccountException;
-import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.config.IniSecurityManagerFactory;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
-import org.apache.shiro.util.Factory;
 import org.junit.Test;
+
+import com.makebono.mavenplayland.test.shirotest.service.RealmLogin;
 
 import junit.framework.Assert;
 
@@ -20,18 +19,7 @@ import junit.framework.Assert;
  */
 public class ShiroAuthenticatorTest {
     private void login(final String configFile) {
-        // Initilize SecurityManager factory
-        final Factory<org.apache.shiro.mgt.SecurityManager> factory = new IniSecurityManagerFactory(configFile);
-
-        // Get SecurityManager
-        final org.apache.shiro.mgt.SecurityManager securityManager = factory.getInstance();
-        SecurityUtils.setSecurityManager(securityManager);
-
-        // Authenticate given username and password.
-        final Subject subject = SecurityUtils.getSubject();
-        final UsernamePasswordToken token = new UsernamePasswordToken("fredfuchs", "000");
-
-        subject.login(token);
+        RealmLogin.login(configFile, "fredfuchs", "000");
     }
 
     @Test
@@ -87,9 +75,16 @@ public class ShiroAuthenticatorTest {
         login("src/test/resources/shiro/shiro-authenticator-atLeastTwo-fail.ini");
     }
 
+    // Self-written jdbc realm
     @Test
     public void testDBRealm() {
         login("src/test/resources/shiro/shiro-authenticator-db.ini");
+    }
+
+    // Shiro built-in jdbc realm. Table and column name have strict restrictions.
+    @Test
+    public void testJDBCRealm() {
+        login("src/test/resources/shiro/shiro-jbdc-realm.ini");
     }
 
     public static void main(final String[] args) {
