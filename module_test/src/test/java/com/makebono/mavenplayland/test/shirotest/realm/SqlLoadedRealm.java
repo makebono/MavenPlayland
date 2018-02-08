@@ -50,7 +50,7 @@ public class SqlLoadedRealm implements Realm {
         if (candidate.equals(Boolean.FALSE)) {
             throw new UnknownAccountException();
         }
-        if (!((UserAccount) candidate).getSecurityKey().equals(password)) {
+        if (!((UserAccount) candidate).getPassword().equals(password)) {
             throw new IncorrectCredentialsException();
         }
         //
@@ -59,7 +59,7 @@ public class SqlLoadedRealm implements Realm {
 
     public static Object findUser(final String account) {
         for (final UserAccount cursor : info) {
-            if (account.equals(cursor.getAccount())) {
+            if (account.equals(cursor.getUsername())) {
                 return cursor;
             }
         }

@@ -15,6 +15,6 @@ import com.makebono.mavenplayland.module_test.module.entities.UserAccount;
  */
 
 public interface UserAccountService {
-    @Select("select * from useraccounts")
+    @Select("select * from users")
     public List<UserAccount> selectAll();
 }

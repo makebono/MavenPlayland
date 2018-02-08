@@ -36,6 +36,8 @@ public class TestField {
     }
 
     public static void main(final String[] args) {
-        System.out.println(UserAccountConnector.selectAll());
+        final UserAccountConnector c1 = new UserAccountConnector();
+        final UserAccountConnector c2 = new UserAccountConnector();
+        System.out.println(c1 == c2);
     }
 }

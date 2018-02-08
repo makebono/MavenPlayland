@@ -5,52 +5,59 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /** 
- * @ClassName: UserAccount 
- * @Description: UserAccount 
+ * @ClassName: UserUsername 
+ * @Description: UserUsername 
  * @author makebono
  * @date 2018年2月7日 下午2:06:17 
  *  
  */
-@Table(name = "useraccounts")
+@Table(name = "users")
 public class UserAccount {
     @Id
-    @Column(name = "ACCOUNT", columnDefinition = "VARCHAR")
-    private String ACCOUNT;
+    @Column(name = "id", columnDefinition = "BIGINT")
+    private Long id;
 
-    @Column(name = "SECURITYKEY", columnDefinition = "VARCHAR")
-    private String SECURITYKEY;
+    @Column(name = "username", columnDefinition = "VARCHAR")
+    private String username;
 
-    @Column(name = "ROLE", columnDefinition = "VARCHAR")
-    private String ROLE;
+    @Column(name = "password", columnDefinition = "VARCHAR")
+    private String password;
 
-    public void setAccount(final String ACCOUNT) {
-        this.ACCOUNT = ACCOUNT;
+    @Column(name = "password_salt", columnDefinition = "VARCHAR")
+    private String password_salt;
+
+    public void setId(final Long id) {
+        this.id = id;
     }
 
-    public void setSecurityKey(final String SECURITYKEY) {
-        this.SECURITYKEY = SECURITYKEY;
+    public void setUsername(final String username) {
+        this.username = username;
     }
 
-    public void setRole(final String ROLE) {
-        this.ROLE = ROLE;
+    public void setPassword(final String password) {
+        this.password = password;
     }
 
-    public String getAccount() {
-        return this.ACCOUNT;
+    public void setPassword_salt(final String password_salt) {
+        this.password_salt = password_salt;
     }
 
-    public String getSecurityKey() {
-        return this.SECURITYKEY;
+    public String getUsername() {
+        return this.username;
     }
 
-    public String getRole() {
-        return this.ROLE;
+    public String getPassword() {
+        return this.password;
+    }
+
+    public String getPassword_salt() {
+        return this.password_salt;
     }
 
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        sb.append(this.ACCOUNT + "(" + this.SECURITYKEY + ") , " + this.ROLE + ".");
+        sb.append(this.username + "(" + this.id + ", " + this.password + ", " + this.password_salt + ")");
         return sb.toString();
     }
 }
