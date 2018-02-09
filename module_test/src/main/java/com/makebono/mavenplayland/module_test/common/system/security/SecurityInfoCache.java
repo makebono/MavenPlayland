@@ -6,8 +6,10 @@
  */
 package com.makebono.mavenplayland.module_test.common.system.security;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,67 +37,88 @@ public class SecurityInfoCache {
 
     @Autowired
     private RolePermissionService permissionService;
-
     private static SecurityInfoCache cache;
-    private List<UserAccount> accountInfo;
-    private List<UserRole> roleInfo;
-    private List<RolePermission> permissionInfo;
+    private Map<String, UserAccount> accountInfo;
+    private Map<String, UserRole> roleInfo;
+    private Map<String, RolePermission> permissionInfo;
 
     private SecurityInfoCache() {}
 
     public void init() {
         cache = this;
-        cache.accountInfo = cache.accountService.selectAll();
-        cache.roleInfo = cache.roleService.selectAll();
-        cache.permissionInfo = cache.permissionService.selectAll();
+        cache.accountInfo = cache.loadAccount();
+        cache.roleInfo = cache.loadRole();
+        cache.permissionInfo = cache.loadPermission();
     }
 
     public void reload() {
-        cache.accountInfo = cache.accountService.selectAll();
-        cache.roleInfo = cache.roleService.selectAll();
-        cache.permissionInfo = cache.permissionService.selectAll();
+        cache.accountInfo = cache.loadAccount();
+        cache.roleInfo = cache.loadRole();
+        cache.permissionInfo = cache.loadPermission();
         System.out.println("Security cache reloaded.");
     }
 
-    public static List<UserAccount> getAccountInfo() {
+    public Map<String, UserAccount> loadAccount() {
+        final Map<String, UserAccount> info = new HashMap<String, UserAccount>();
+        final List<UserAccount> accounts = cache.accountService.selectAll();
+        for (final UserAccount candidate : accounts) {
+            info.put(candidate.getUsername(), candidate);
+        }
+        return info;
+    }
+
+    public Map<String, UserRole> loadRole() {
+        final Map<String, UserRole> info = new HashMap<String, UserRole>();
+        final List<UserRole> roles = cache.roleService.selectAll();
+        for (final UserRole candidate : roles) {
+            info.put(candidate.getUsername(), candidate);
+        }
+        return info;
+    }
+
+    public Map<String, RolePermission> loadPermission() {
+        final Map<String, RolePermission> info = new HashMap<String, RolePermission>();
+        final List<RolePermission> permissions = cache.permissionService.selectAll();
+        for (final RolePermission candidate : permissions) {
+            info.put(candidate.getRole_name(), candidate);
+        }
+        return info;
+    }
+
+    public static Map<String, UserAccount> getAccountInfo() {
         return cache.accountInfo;
     }
 
-    public static List<UserRole> getRoleInfo() {
+    public static Map<String, UserRole> getRoleInfo() {
         return cache.roleInfo;
     }
 
-    public static List<RolePermission> getPermissionInfo() {
+    public static Map<String, RolePermission> getPermissionInfo() {
         return cache.permissionInfo;
     }
 
     public static Object findUser(final String account) {
-        for (final UserAccount cursor : cache.accountInfo) {
-            if (account.equals(cursor.getUsername())) {
-                return cursor;
-            }
+        UserAccount candidate = cache.accountInfo.get(account);
+
+        if (candidate != null) {
+            return candidate;
         }
 
         cache.reload();
 
-        for (final UserAccount cursor : cache.accountInfo) {
-            if (account.equals(cursor.getUsername())) {
-                return cursor;
-            }
+        candidate = cache.accountInfo.get(account);
+
+        if (candidate != null) {
+            return candidate;
         }
 
         return Boolean.FALSE;
     }
 
+    // Add role not defined exception.
     public static Object findRolesForUser(final String user) {
         final Set<String> roles = new HashSet<String>();
-        String roleString = "";
-        for (final UserRole cursor : cache.roleInfo) {
-            if (user.equals(cursor.getUsername())) {
-                roleString = cursor.getRole_name();
-                break;
-            }
-        }
+        final String roleString = cache.roleInfo.get(user).getRole_name();
 
         if (roleString.length() != 0) {
             int start = 0;
@@ -117,15 +140,10 @@ public class SecurityInfoCache {
         return roles.size() != 0 ? roles : Boolean.FALSE;
     }
 
+    // Add permission not defined exception.
     public static Object findPermissionsForRole(final String role) {
         final Set<String> permission = new HashSet<String>();
-        String permissionString = "";
-        for (final RolePermission cursor : cache.permissionInfo) {
-            if (role.equals(cursor.getRole_name())) {
-                permissionString = cursor.getPermission();
-                break;
-            }
-        }
+        final String permissionString = cache.permissionInfo.get(role).getPermission();
 
         if (permissionString.length() != 0) {
             int start = 0;
