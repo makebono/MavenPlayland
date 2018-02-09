@@ -1,7 +1,8 @@
 /**Note:
  * Purpose of this cache is to load account, role, permission info at start-up. So it will save bunch of times than querying the database
- * for each security related manipulation will cost a lot. A reload method is here, can be recall any time needed for updating cache from
- * database. In this specific situation, I reload once each time when cannot find an input user. 
+ * for each security related manipulation. A reload method here could be recall any time needed for updating cache from database. In this
+ * specific situation, I reload once each time when cannot find an input user. And in dispatcher servlet there's a config for reloading 
+ * every 5 mins after start-up. 
  */
 package com.makebono.mavenplayland.module_test.common.system.security;
 
