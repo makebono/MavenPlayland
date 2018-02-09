@@ -31,9 +31,9 @@ public class TempAccountTestController {
         final List failed = new ArrayList();
         try {
             final List result = new ArrayList();
-            result.addAll(SecurityInfoCache.getAccountInfo());
-            result.addAll(SecurityInfoCache.getRoleInfo());
-            result.addAll(SecurityInfoCache.getPermissionInfo());
+            result.addAll(SecurityInfoCache.getAccountInfo().values());
+            result.addAll(SecurityInfoCache.getRoleInfo().values());
+            result.addAll(SecurityInfoCache.getPermissionInfo().values());
 
             System.out.println(result);
 
