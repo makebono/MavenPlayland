@@ -5,7 +5,7 @@ import org.apache.log4j.LogManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.makebono.mavenplayland.test.shirotest.service.UserAccountConnector;
+import com.makebono.mavenplayland.test.encrpytion.EncryptionTest;
 
 /** 
  * @ClassName: TestField 
@@ -36,8 +36,7 @@ public class TestField {
     }
 
     public static void main(final String[] args) {
-        final UserAccountConnector c1 = new UserAccountConnector();
-        final UserAccountConnector c2 = new UserAccountConnector();
-        System.out.println(c1 == c2);
+        EncryptionTest.reference("Akebono");
+
     }
 }

@@ -48,6 +48,7 @@ public class AuthenticationRealm extends AuthorizingRealm {
         Set<String> permissions = null;
 
         roleNames = (Set<String>) SecurityInfoCache.findRolesForUser(username);
+        System.out.println(roleNames);
         for (final String role : roleNames) {
             if (permissions == null) {
                 permissions = (Set<String>) SecurityInfoCache.findPermissionsForRole(role);
@@ -57,6 +58,7 @@ public class AuthenticationRealm extends AuthorizingRealm {
         }
 
         final SimpleAuthorizationInfo info = new SimpleAuthorizationInfo(roleNames);
+        System.out.println(permissions);
         info.setStringPermissions(permissions);
         return info;
     }

@@ -1,3 +1,8 @@
+/**Note:
+ * Purpose of this cache is to load account, role, permission info at start-up. So it will save bunch of times than querying the database
+ * for each security related manipulation will cost a lot. A reload method is here, can be recall any time needed for updating cache from
+ * database. In this specific situation, I reload once each time when cannot find an input user. 
+ */
 package com.makebono.mavenplayland.module_test.common.system.security;
 
 import java.util.HashSet;
@@ -39,9 +44,16 @@ public class SecurityInfoCache {
 
     public void init() {
         cache = this;
-        this.accountInfo = this.accountService.selectAll();
-        this.roleInfo = this.roleService.selectAll();
-        this.permissionInfo = this.permissionService.selectAll();
+        cache.accountInfo = cache.accountService.selectAll();
+        cache.roleInfo = cache.roleService.selectAll();
+        cache.permissionInfo = cache.permissionService.selectAll();
+    }
+
+    public void reload() {
+        cache.accountInfo = cache.accountService.selectAll();
+        cache.roleInfo = cache.roleService.selectAll();
+        cache.permissionInfo = cache.permissionService.selectAll();
+        System.out.println("Security cache reloaded.");
     }
 
     public static List<UserAccount> getAccountInfo() {
@@ -62,26 +74,75 @@ public class SecurityInfoCache {
                 return cursor;
             }
         }
+
+        cache.reload();
+
+        for (final UserAccount cursor : cache.accountInfo) {
+            if (account.equals(cursor.getUsername())) {
+                return cursor;
+            }
+        }
+
         return Boolean.FALSE;
     }
 
     public static Object findRolesForUser(final String user) {
         final Set<String> roles = new HashSet<String>();
+        String roleString = "";
         for (final UserRole cursor : cache.roleInfo) {
             if (user.equals(cursor.getUsername())) {
-                roles.add(cursor.getRole_name());
+                roleString = cursor.getRole_name();
+                break;
             }
         }
+
+        if (roleString.length() != 0) {
+            int start = 0;
+            int end = 0;
+
+            for (int i = 0; i < roleString.length(); i++) {
+                if (roleString.charAt(i) == ',') {
+                    end = i;
+                    roles.add(roleString.substring(start, end));
+                    start = i + 1;
+                }
+
+                if (i == roleString.length() - 1) {
+                    roles.add(roleString.substring(start, roleString.length()));
+                }
+            }
+        }
+
         return roles.size() != 0 ? roles : Boolean.FALSE;
     }
 
     public static Object findPermissionsForRole(final String role) {
         final Set<String> permission = new HashSet<String>();
+        String permissionString = "";
         for (final RolePermission cursor : cache.permissionInfo) {
             if (role.equals(cursor.getRole_name())) {
-                permission.add(cursor.getPermission());
+                permissionString = cursor.getPermission();
+                break;
             }
         }
+
+        if (permissionString.length() != 0) {
+            int start = 0;
+            int end = 0;
+
+            for (int i = 0; i < permissionString.length(); i++) {
+                if (permissionString.charAt(i) == ',') {
+                    end = i;
+                    permission.add(permissionString.substring(start, end));
+                    start = i + 1;
+                }
+
+                if (i == permissionString.length() - 1) {
+                    permission.add(permissionString.substring(start, permissionString.length()));
+                }
+            }
+        }
+
         return permission.size() != 0 ? permission : Boolean.FALSE;
     }
 }

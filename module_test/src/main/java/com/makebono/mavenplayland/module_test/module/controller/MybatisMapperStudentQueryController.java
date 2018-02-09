@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.makebono.mavenplayland.module_test.module.entities.Student;
@@ -31,12 +32,33 @@ public class MybatisMapperStudentQueryController {
 
     @RequestMapping(value = "/selectOne", method = { RequestMethod.POST, RequestMethod.GET })
     @ResponseBody
-    public Student selectOne(final HttpServletRequest request) {
+    public Student selectByKey(final HttpServletRequest request) {
         // Type convert problem solved by changing type of ID to Long in Student class.
         final long key = Long.valueOf(request.getParameter("ID"));
         logger.info("Select one from maven_test with key(" + key + ")");
         try {
             final Student result = this.service.selectByKey(key);
+            logger.info("Query complete, result is:\n    " + result);
+            return result;
+        }
+        catch (final Exception e) {
+            System.out.println("Error occurs, message: " + e.getMessage());
+            return null;
+        }
+    }
+
+    @RequestMapping(value = "/select", method = { RequestMethod.POST, RequestMethod.GET })
+    @ResponseBody
+    public Student select(@RequestParam(required = true, value = "student") final Student student) {
+        // Type convert problem solved by changing type of ID to Long in Student class.
+
+        logger.info("Select one from maven_test with student(" + student + ")");
+        try {
+            final Student result = this.service.selectOne(student);
+            // System.out.println("Input entity: " + student);
+
+            // System.out.println("DB entity: " + this.service.selectByKey(1L));
+
             logger.info("Query complete, result is:\n    " + result);
             return result;
         }

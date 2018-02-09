@@ -14,18 +14,11 @@ import javax.persistence.Table;
 @Table(name = "roles_permissions")
 public class RolePermission {
     @Id
-    @Column(name = "id", columnDefinition = "BIGINT")
-    private Long id;
-
     @Column(name = "role_name", columnDefinition = "VARCHAR")
     private String role_name;
 
     @Column(name = "permission", columnDefinition = "VARCHAR")
     private String permission;
-
-    public void setId(final Long id) {
-        this.id = id;
-    }
 
     public void setRole_name(final String role_name) {
         this.role_name = role_name;
@@ -46,7 +39,7 @@ public class RolePermission {
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        sb.append(this.role_name + "(" + this.id + ", " + this.permission + ")");
+        sb.append(this.role_name + "(" + this.permission + ")");
         return sb.toString();
     }
 }

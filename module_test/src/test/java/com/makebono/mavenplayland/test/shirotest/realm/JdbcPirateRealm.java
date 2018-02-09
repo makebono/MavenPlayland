@@ -1,8 +1,11 @@
 package com.makebono.mavenplayland.test.shirotest.realm;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.apache.shiro.authz.AuthorizationException;
@@ -69,10 +72,57 @@ public class JdbcPirateRealm extends JdbcRealm {
     }
 
     @Override
+    protected Set<String> getRoleNamesForUser(final Connection conn, final String username) throws SQLException {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        final Set<String> roleNames = new LinkedHashSet<String>();
+        try {
+            ps = conn.prepareStatement(userRolesQuery);
+            ps.setString(1, username);
+
+            // Execute query
+            rs = ps.executeQuery();
+
+            // Loop over results and add each returned role to a set
+            rs.next();
+
+            final String roles = rs.getString(1);
+
+            // Add the role to the list of names if it isn't null
+            if (roles != null) {
+                int start = 0;
+                int end = 0;
+
+                for (int i = 0; i < roles.length(); i++) {
+                    if (roles.charAt(i) == ',') {
+                        end = i;
+                        roleNames.add(roles.substring(start, end));
+                        start = i + 1;
+                    }
+
+                    if (i == roles.length() - 1) {
+                        roleNames.add(roles.substring(start, roles.length()));
+                    }
+                }
+            } else {
+                if (log.isWarnEnabled()) {
+                    log.warn("Null role name found while retrieving role names for user [" + username + "]");
+                }
+            }
+
+        }
+        finally {
+            JdbcUtils.closeResultSet(rs);
+            JdbcUtils.closeStatement(ps);
+        }
+        return roleNames;
+    }
+
+    @Override
     protected Set<String> getPermissions(final Connection conn, final String username,
             final Collection<String> roleNames) throws SQLException {
         final Set<String> result = super.getPermissions(conn, username, roleNames);
-        System.out.println(result);
+        // System.out.println(result);
         return result;
     }
 

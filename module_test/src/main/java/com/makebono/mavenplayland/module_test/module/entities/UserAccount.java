@@ -14,9 +14,6 @@ import javax.persistence.Table;
 @Table(name = "users")
 public class UserAccount {
     @Id
-    @Column(name = "id", columnDefinition = "BIGINT")
-    private Long id;
-
     @Column(name = "username", columnDefinition = "VARCHAR")
     private String username;
 
@@ -25,10 +22,6 @@ public class UserAccount {
 
     @Column(name = "password_salt", columnDefinition = "VARCHAR")
     private String password_salt;
-
-    public void setId(final Long id) {
-        this.id = id;
-    }
 
     public void setUsername(final String username) {
         this.username = username;
@@ -57,7 +50,7 @@ public class UserAccount {
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        sb.append(this.username + "(" + this.id + ", " + this.password + ", " + this.password_salt + ")");
+        sb.append(this.username + "(" + this.password + ", " + this.password_salt + ")");
         return sb.toString();
     }
 }

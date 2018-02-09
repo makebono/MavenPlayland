@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Put annotation scan and bean registry down different file, or web.xml will load all stuffs twice. -->
-<beans xmlns="http://www.springframework.org/schema/beans"
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:task="http://www.springframework.org/schema/task"
     xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
     xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
@@ -14,6 +14,8 @@
         http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd   
         http://www.springframework.org/schema/tx   
         http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+        http://www.springframework.org/schema/task 
+        http://www.springframework.org/schema/task/spring-task-4.0.xsd
         http://code.alibabatech.com/schema/dubbo        
         http://code.alibabatech.com/schema/dubbo/dubbo.xsd">     
         
@@ -76,5 +78,10 @@
         <context:exclude-filter type="annotation" expression="com.makebono.mavenplayland.module_test.common.annotations.DontAutowireMe"/>
     </context:component-scan>   
     
-    <bean class="com.makebono.mavenplayland.module_test.common.system.security.SecurityInfoCache" init-method="init"></bean>    
+    <bean id = "securityCache" class="com.makebono.mavenplayland.module_test.common.system.security.SecurityInfoCache" init-method="init"></bean>    
+    
+    <!-- Set a schedule for executing certain tasks -->
+    <task:scheduled-tasks> 
+        <task:scheduled ref="securityCache" method="reload" initial-delay="300000" fixed-delay="300000"/>  
+    </task:scheduled-tasks>
 </beans>  
