@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Put annotation scan and bean registry down different file, or web.xml will load all stuffs twice. -->
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:task="http://www.springframework.org/schema/task"
+    xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+    xsi:schemaLocation="http://www.springframework.org/schema/aop   
+        http://www.springframework.org/schema/aop/spring-aop-4.0.xsd   
+        http://www.springframework.org/schema/beans   
+        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd   
+        http://www.springframework.org/schema/context   
+        http://www.springframework.org/schema/context/spring-context-4.0.xsd   
+        http://www.springframework.org/schema/mvc   
+        http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd   
+        http://www.springframework.org/schema/tx   
+        http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+        http://www.springframework.org/schema/task 
+        http://www.springframework.org/schema/task/spring-task-4.0.xsd
+        http://code.alibabatech.com/schema/dubbo        
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">        
+        
+    <!-- Be careful about this. If you used mvc:annotation-driven, then must add this bean here. Since
+         annotation-driven will automatically load RequestMappingHandlerAdapter bean, so load it here is
+         a must if using customized binding initializer. -->
+    <!-- And don't forget to put this under DispatcherServlet's defined path. -->         
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <!-- Binding input request -->
+        <property name="webBindingInitializer">
+            <!-- <bean class="com.makebono.mavenplayland.module_test.common.utils.CustomizedWebBindingInitializer" lazy-init = "true" />  --> 
+            <bean class="com.makebono.mavenplayland.module_test.common.utils.CustomizedWebBindingInitializer" /> 
+        </property>      
+    
+        <!-- Intepreting/Converting output type -->
+        <property name="messageConverters">
+            <list>
+                <!-- When multiple converters existing, a response would scan through converter list in top to bottom order as writting down below. -->
+                <!-- Better not use self defined converters along with Json. Some delicate conflicts, there are. -->
+                <!-- <bean class="com.makebono.mavenplayland.module_test.common.utils.DateResponseConverter"/>
+                <bean class="com.makebono.mavenplayland.module_test.common.utils.StudentResponseConverter"/>
+                <bean class="com.makebono.mavenplayland.module_test.common.utils.StringResponseConverter"/>
+                <bean class="com.makebono.mavenplayland.module_test.common.utils.ListResponseConverter"/> -->
+                <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/> 
+            </list>        
+        </property>           
+    </bean>                
+        
+    <!-- Customized initialzation and destruction control -->
+    <bean class="com.makebono.mavenplayland.module_test.common.system.InitializationAndDestructionManager" 
+        init-method="bonoInit" destroy-method="bonoDestroy"></bean>      
+
+    <!-- Bind specific HandlerInterceptorAdapter to a certain path -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/interceptorTest/*" />
+            <ref bean="bonoInterceptorHandler" />
+        </mvc:interceptor>    
+    </mvc:interceptors>          
+               
+    <mvc:annotation-driven />
+    <!-- <context:annotation-config></context:annotation-config> -->
+    
+    <dubbo:annotation package="
+    com.makebono.mavenplayland.module_web.module" />
+        
+    <context:component-scan base-package="com.makebono.mavenplayland.module_web.module.controller" >
+    <!-- scan for classes annotated as service or controller -->    
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>        
+    </context:component-scan>   
+    
+</beans>  
