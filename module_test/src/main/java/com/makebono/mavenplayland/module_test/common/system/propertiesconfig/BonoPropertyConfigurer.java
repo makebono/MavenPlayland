@@ -1,7 +1,6 @@
 package com.makebono.mavenplayland.module_test.common.system.propertiesconfig;
 
 import java.io.InputStream;
-import java.util.Enumeration;
 import java.util.Properties;
 import java.util.Set;
 
@@ -50,14 +49,15 @@ public class BonoPropertyConfigurer extends PropertySourcesPlaceholderConfigurer
             System.out.println("Error occurs, message: " + e.getMessage());
         }
 
-        System.out.print("All properties resolved.\n    ");
+        /*System.out.print("All properties resolved.\n    ");
         final Enumeration<?> propertySet = properties.propertyNames();
-
+        
         while (propertySet.hasMoreElements()) {
             final String candidate = (String) propertySet.nextElement();
             System.out.print(candidate + " = " + properties.getProperty(candidate) + "\n    ");
         }
         System.out.println();
+        */
 
         this.setProperties(properties);
     }

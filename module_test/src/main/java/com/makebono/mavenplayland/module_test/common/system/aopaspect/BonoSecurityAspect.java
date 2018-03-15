@@ -26,7 +26,7 @@ public class BonoSecurityAspect {
                 "@Aspect com.makebono.mavenplayland.module_test.common.system.aopaspect.BonoSecurityAspect initialzed.");
     }
 
-    @Around("execution(* com.makebono.mavenplayland.module_test.module.controller.TempAccountTestController.getInfo(..))")
+    @Around("execution(* com.makebono.mavenplayland.module_web.module.controller.TempAccountTestController.getInfo(..))")
     public Object permissionInspect(final ProceedingJoinPoint joinPoint) throws Throwable {
         try {
             if (authorizingService.inspect("/securityInfo")) {
